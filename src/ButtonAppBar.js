@@ -36,7 +36,7 @@ class ButtonAppBar extends Component {
     }
 
     render() {
-        const {classes, fileNames, changeFiles} = this.props;
+        const {classes, fileNames, updateFiles} = this.props;
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -47,7 +47,7 @@ class ButtonAppBar extends Component {
 
                         <label htmlFor="flat-button-file">
                             <input className={classes.input}  id="flat-button-file" multiple type="file"
-                                   onChange={e => changeFiles(e)}/>
+                                   onChange={e => updateFiles(e)}/>
                             {fileNames.map(fileName => (
                                 <span key={fileName} color={'#0000'}>{fileName}&nbsp;&nbsp;</span>
                             ))}

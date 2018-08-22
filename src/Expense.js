@@ -63,7 +63,8 @@ function Expense(props) {
         <div>
             <div>
                 {payloads.map(payload => (
-                    <span key={payload.date}>{payload.date}-{payload.amount} &nbsp;&nbsp;</span>
+                    <span key={payload.date}>{payload.date}-{payload.expenditure} &nbsp;&nbsp;
+                    </span>
                 ))}
             </div>
             <Grid container spacing={40} alignItems="flex-end">
