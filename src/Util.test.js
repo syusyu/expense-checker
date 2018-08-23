@@ -1,4 +1,4 @@
-import {inverseObject} from './Util'
+import {inverseObject, isEmpty} from './Util'
 
 
 describe('Inverse object', () => {
@@ -14,3 +14,14 @@ describe('Inverse object', () => {
     });
 });
 
+describe('isEmpty', () => {
+    it ('Null', () => {
+        expect(isEmpty(null)).toEqual(true);
+        expect(isEmpty([])).toEqual(true);
+        expect(isEmpty({})).toEqual(true);
+        expect(isEmpty(1)).toEqual(false);
+        expect(isEmpty('')).toEqual(true);
+        expect(isEmpty([1])).toEqual(false);
+        expect(isEmpty({a: "a"})).toEqual(false);
+    })
+})

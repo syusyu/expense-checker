@@ -11,7 +11,7 @@ class App extends Component {
 
         this.state = {
             fileNames: [],
-            tiers: [],
+            expense: [],
         }
 
         this.headerTerms = inverseObject(CONFIG.HEADER_TERMS);
@@ -23,7 +23,7 @@ class App extends Component {
         Promise.all(Array.from(e.target.files).map(file => this.parseCsv(file))).then(result => {
             this.setState({
                 fileNames: fileNames,
-                tiers: this.calcExpense(result),
+                expense: this.calcExpense(result),
             })
         });
     }
@@ -71,7 +71,7 @@ class App extends Component {
         return (
             <div>
                 <ButtonAppBar fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)}/>
-                <Expense tiers={this.state.tiers}/>
+                <Expense tiers={this.state.expense}/>
             </div>
         );
     }

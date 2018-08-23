@@ -5,3 +5,16 @@ export const inverseObject = (obj) => {
     }, {});
 }
 
+export const isEmpty = (obj) => {
+    if (!obj) {
+        return true;
+    }
+    if (Array.isArray(obj)) {
+        return obj.length < 1;
+    }
+    if (typeof obj === 'object') {
+        return Object.keys(obj).length < 1;
+    }
+    return false;
+}
+
