@@ -13,21 +13,19 @@ const app = new App();
 // Incorrect header
 // Incorrect amount
 
-const csvNormal = [
+const paramSingleNormal = [
     [
-        {date: '2018/08/01', amount: '1000', class: '', foo: 'bar'}, {date: '2018/07/01', amount: '3000', baz: 'qux' },
-        {date: '2018/08/02', amount: '1000', class: '', foo: 'bar'}, {date: '2018/07/02', amount: '3000', baz: 'qux' },
-        {date: '2018/08/03', amount: '1000', class: '', foo: 'bar'}, {date: '2018/07/03', amount: '3000', baz: 'qux' },
+        {date: '2018/08/01', expenditure: 1000, class: '', foo: 'bar'}, {date: '2018/07/01', expenditure: 3000, baz: 'qux' },
+        {date: '2018/08/02', expenditure: 1000, class: '', foo: 'bar'}, {date: '2018/07/02', expenditure: 3000, baz: 'qux' },
+        {date: '2018/08/03', expenditure: 1000, class: '', foo: 'bar'}, {date: '2018/07/03', expenditure: 3000, baz: 'qux' },
     ],
 ];
-const expectedNormal = [
-    {date: '2018/08', }
+const expectedSingleNormal = [
+    {date: '2018/8', expenditure: 3000}, {date: '2018/7', expenditure: 9000}
+];
 
-]
 describe('Calculate expense', () => {
     it('Normal', () => {
-        const expected = [{date: '2018/08', expenditure: '¥3,000'}];
-        const param = [];
-        expect(app.calcExpense(param)).toEqual(expected);
+        expect(app.calcExpense(paramSingleNormal)).toEqual(expectedSingleNormal);
     });
 });

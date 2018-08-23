@@ -55,6 +55,10 @@ const tiers = [
     },
 ];
 
+const f = new Intl.NumberFormat('ja-JP', {
+    style: 'currency',
+    currency: 'JPY'
+});
 
 function Expense(props) {
     const { classes, payloads } = props;
@@ -63,7 +67,7 @@ function Expense(props) {
         <div>
             <div>
                 {payloads.map(payload => (
-                    <span key={payload.date}>{payload.date}-{payload.expenditure} &nbsp;&nbsp;
+                    <span key={payload.date}>{payload.date}-{f.format(payload.expenditure)} &nbsp;&nbsp;
                     </span>
                 ))}
             </div>

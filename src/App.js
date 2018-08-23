@@ -3,7 +3,7 @@ import ButtonAppBar from './ButtonAppBar';
 import Expense from './Expense';
 import Papa from 'papaparse';
 import {inverseObject} from './Util';
-
+import Moment from 'moment';
 
 class App extends Component {
     constructor(props) {
@@ -49,28 +49,27 @@ class App extends Component {
         });
     }
 
+    /**
+     * Basic validation (header check, empty check) should be done before calling this method.
+     * @param arrays
+     */
     calcExpense(arrays) {
-        return [{date: '2018/08', expenditure: '¥3,000'}];
+        let mergedArray = arrays.reduce((prev, current) => prev.concat(current));
+        let result = mergedArray.reduce((prev, current) => {
+            let expenditure = parseInt(current.expenditure) || 0;
+            const date = Moment(current.date, 'YYYY/MM/DD');
+            const key = date.year() + "/" + (date.month() + 1);
+            let elem = prev.find(e => e.date === key);
+            if (!elem) {
+                elem = {date: key, expenditure: 0};
+                prev.push(elem);
+            }
+            elem.expenditure += expenditure;
+            return prev;
+        }, []);
 
+        return result;
     }
-
-
-    // calcExpense(files) {
-    //     let result = [];
-    //     for (const file of files) {
-    //         for (const row of file) {
-    //             const found = result.length > 0 && result.find(elm => elm.date === row.date);
-    //             if (found) {
-    //                 found.amount += row.amount;
-    //             } else {
-    //                 result.push(row);
-    //             }
-    //         }
-    //     }
-    //
-    //     console.log('result=' + result);
-    //     return result;
-    // }
 
 
     render() {
