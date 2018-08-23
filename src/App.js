@@ -34,17 +34,16 @@ class App extends Component {
             reader.onload = (e) => {
                 let content = e.target.result;
                 for (const key of Object.keys(this.headerTerms)) {
-                    content = content.replace(new RegExp(key,"g"), this.headerTerms[key])
+                    content = content.replace(new RegExp(key, "g"), this.headerTerms[key])
                 }
                 for (const key of Object.keys(this.filterTerms)) {
-                    content = content.replace(new RegExp(key,"g"), this.filterTerms[key])
+                    content = content.replace(new RegExp(key, "g"), this.filterTerms[key])
                 }
                 const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true});
-                console.log('data4=' + JSON.stringify(parsedData.data[4]));
-                resolve([{date: '2018/08', amount: '1000'}, {date: '2018/07', amount: '3000'}])
-            };
+                resolve(parsedData.data);
+            }
             reader.onerror = () => {
-                reject('###csv load error: ' + file.name);
+                reject('csv load error: ' + file.name);
             };
         });
     }
@@ -54,9 +53,7 @@ class App extends Component {
      * @param arrays
      */
     calcExpense(arrays) {
-        let mergedArray = arrays.reduce((prev, current) => prev.concat(current));
-        let result = mergedArray.reduce((prev, current) => {
-            let expenditure = parseInt(current.expenditure) || 0;
+        return arrays.reduce((prev, current) => prev.concat(current)).reduce((prev, current) => {
             const date = Moment(current.date, 'YYYY/MM/DD');
             const key = date.year() + "/" + (date.month() + 1);
             let elem = prev.find(e => e.date === key);
@@ -64,11 +61,9 @@ class App extends Component {
                 elem = {date: key, expenditure: 0};
                 prev.push(elem);
             }
-            elem.expenditure += expenditure;
+            elem.expenditure += ((current.expenditure ? parseInt(current.expenditure.replace(/,/g, '')) : 0) || 0);
             return prev;
         }, []);
-
-        return result;
     }
 
 
