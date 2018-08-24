@@ -55,10 +55,6 @@ class App extends Component {
         return record && record.date && record.expenditure;
     }
 
-    /**
-     * Basic validation (header check, empty check) should be done before calling this method.
-     * @param arrays
-     */
     calcExpense(arrays) {
         const warnings = [];
         const records = arrays.reduce((prev, current) => prev.concat(current)).reduce((prev, current, idx) => {
@@ -70,7 +66,7 @@ class App extends Component {
                 warnings.push({line: (idx + 1), date: current.date, expenditure: current.expenditure});
                 return prev;
             }
-            const key = date.year() + "/" + (date.month() + 1);
+            const key = date.year() + "-" + ('0' + (date.month() + 1)).slice(-2);
             let elem = prev.find(e => e.date === key);
             if (!elem) {
                 elem = {date: key, expenditure: 0};

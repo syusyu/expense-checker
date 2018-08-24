@@ -17,7 +17,7 @@ const styles = theme => ({
         padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
     },
     cardHeader: {
-        backgroundColor: theme.palette.grey[200],
+        backgroundColor: '#EEEEEE',
     },
     cardPricing: {
         display: 'flex',
@@ -54,9 +54,10 @@ class Expense extends Component {
                         <Grid item key={record.date} xs={12} sm={6} md={4}>
                             <Card>
                                 <CardHeader
-                                    title={Moment(record.date).format(dateFormat).toString()}
+                                    title={Moment(record.date).format(dateFormat)}
                                     titleTypographyProps={{ align: 'center' }}
                                     subheaderTypographyProps={{ align: 'center' }}
+                                    style={{backgroundColor: record.color}}
                                     className={classes.cardHeader}
                                 />
                                 <CardContent>

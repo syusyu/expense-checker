@@ -18,7 +18,7 @@ describe('Calculate expense', () => {
             ],
         ];
         const expected = [
-            {date: '2018/8', expenditure: 3000, color: '#EEEEEE'}, {date: '2018/7', expenditure: 9000, color: '#EEEEEE'}
+            {date: '2018-08', expenditure: 3000, color: '#EEEEEE'}, {date: '2018-07', expenditure: 9000, color: '#EEEEEE'}
         ];
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
@@ -39,7 +39,7 @@ describe('Calculate expense', () => {
             ],
         ];
         const expected = [
-            {date: '2018/8', expenditure: 6000, color: '#EEEEEE'}, {date: '2018/7', expenditure: 18000, color: '#EEEEEE'}
+            {date: '2018-08', expenditure: 6000, color: '#EEEEEE'}, {date: '2018-07', expenditure: 18000, color: '#EEEEEE'}
         ];
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
@@ -63,7 +63,7 @@ describe('Calculate expense', () => {
             ],
         ];
         const expected = [
-            {date: '2018/7', expenditure: 6000, color: '#EEEEEE'}
+            {date: '2018-07', expenditure: 6000, color: '#EEEEEE'}
         ];
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
@@ -80,7 +80,7 @@ describe('Calculate expense', () => {
             ],
         ];
         const expected = [
-            {date: '2018/8', expenditure: 3000, color: '#EEEEEE'}, {date: '2018/7', expenditure: 9000, color: '#EEEEEE'}
+            {date: '2018-08', expenditure: 3000, color: '#EEEEEE'}, {date: '2018-07', expenditure: 9000, color: '#EEEEEE'}
         ];
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
@@ -98,10 +98,10 @@ describe('Calculate expense', () => {
             ],
         ];
         const expected = [
-            {date: '2018/8', expenditure: 1000, color: '#EEEEEE'},  {date: '2018/7', expenditure: 2000, color: '#EEEEEE'},
-            {date: '2018/4', expenditure: 2000, color: '#EEEEEE'},  {date: '2018/1', expenditure: 1000, color: '#EEEEEE'},
-            {date: '2017/12', expenditure: 1000, color: '#EEEEEE'}, {date: '2017/11', expenditure: 1000, color: '#EEEEEE'},
-            {date: '2017/10', expenditure: 1000, color: '#EEEEEE'},  {date: '2017/9', expenditure: 1000, color: '#EEEEEE'},
+            {date: '2018-08', expenditure: 1000, color: '#EEEEEE'},  {date: '2018-07', expenditure: 2000, color: '#EEEEEE'},
+            {date: '2018-04', expenditure: 2000, color: '#EEEEEE'},  {date: '2018-01', expenditure: 1000, color: '#EEEEEE'},
+            {date: '2017-12', expenditure: 1000, color: '#EEEEEE'}, {date: '2017-11', expenditure: 1000, color: '#EEEEEE'},
+            {date: '2017-10', expenditure: 1000, color: '#EEEEEE'},  {date: '2017-09', expenditure: 1000, color: '#EEEEEE'},
         ];
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
