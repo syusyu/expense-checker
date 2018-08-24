@@ -43,12 +43,13 @@ class Expense extends Component {
     render() {
         const { classes, expense } = this.props;
         const records = expense.records || [];
-        const noRecordLabel = isEmpty(records) ? <Typography>Please select your expenditure csv files</Typography> : null;
         const warnings = expense.warnings || [];
-        const warningLabel = !isEmpty(warnings) ? <div>Warnings:</div> : null;
+
         return (
             <div>
-                {noRecordLabel}
+                {isEmpty(records) ?
+                    <Typography>Please select your expenditure csv files</Typography> : null
+                }
                 <Grid container spacing={40} alignItems="flex-end">
                     {records.map(record => (
                         <Grid item key={record.date} xs={12} sm={6} md={4}>
@@ -70,10 +71,33 @@ class Expense extends Component {
                             </Card>
                         </Grid>
                     ))}
+                    {!isEmpty(records) ?
+                        <Grid item key='total' xs={12} sm={12} md={12}>
+                            <Card>
+                                <CardHeader
+                                    title='Total'
+                                    titleTypographyProps={{ align: 'center' }}
+                                    subheaderTypographyProps={{ align: 'center' }}
+                                    style={{backgroundColor: '#0D47A1'}}
+                                />
+                                <CardContent>
+                                    <div className={classes.cardPricing}>
+                                        <Typography variant="display2" color="textPrimary">
+                                            {currencyFormat.format(expense.sum)}
+                                        </Typography>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </Grid> : null
+                    }
                 </Grid>
-                {warningLabel}
+
+                {!isEmpty(warnings) ? <div>Warnings:</div> : null}
+
                 {warnings.map(warning => (
-                    <div key={warning.line}>line={warning.line}, date={warning.date}, expenditure={warning.expenditure}</div>
+                    <div key={warning.line}>
+                        line={warning.line}, date={warning.date}, expenditure={warning.expenditure}
+                    </div>
                 ))}
             </div>
         );

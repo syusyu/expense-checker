@@ -56,7 +56,8 @@ class App extends Component {
     }
 
     calcExpense(arrays) {
-        const warnings = [];
+        let warnings = [];
+        let sum = 0;
         const records = arrays.reduce((prev, current) => prev.concat(current)).reduce((prev, current, idx) => {
             if (!this.filter(current.content)) {
                 return prev;
@@ -72,11 +73,13 @@ class App extends Component {
                 elem = {date: key, expenditure: 0};
                 prev.push(elem);
             }
-            elem.expenditure += ((current.expenditure ? parseInt(current.expenditure.replace(/,/g, '')) : 0) || 0);
+            const expenditure = (current.expenditure ? parseInt(current.expenditure.replace(/,/g, '')) : 0) || 0;
+            elem.expenditure += expenditure;
             elem.color = this.color(elem.expenditure);
+            sum += expenditure;
             return prev;
         }, []);
-        return {records: this.sort(records), warnings: warnings};
+        return {records: this.sort(records), warnings: warnings, sum: sum};
     }
 
     color (val) {

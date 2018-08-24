@@ -23,6 +23,7 @@ describe('Calculate expense', () => {
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
         expect(actual.warnings).toEqual([]);
+        expect(actual.sum).toEqual(12000);
     });
 
     it('Multi Normal', () => {
@@ -44,6 +45,7 @@ describe('Calculate expense', () => {
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
         expect(actual.warnings).toEqual([]);
+        expect(actual.sum).toEqual(24000);
     });
 
     it('Incorrect data', () => {
@@ -51,6 +53,7 @@ describe('Calculate expense', () => {
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual([]);
         expect(actual.warnings).toEqual([{line: 1, date: '2018/08/32', expenditure: '1000'}]);
+        expect(actual.sum).toEqual(0);
     });
 
     it('Filter1', () => {
@@ -68,6 +71,7 @@ describe('Calculate expense', () => {
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
         expect(actual.warnings).toEqual([]);
+        expect(actual.sum).toEqual(6000);
     });
 
     it('Filter2', () => {
@@ -85,6 +89,7 @@ describe('Calculate expense', () => {
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
         expect(actual.warnings).toEqual([]);
+        expect(actual.sum).toEqual(12000);
     });
 
     it('Sort', () => {
@@ -106,6 +111,7 @@ describe('Calculate expense', () => {
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual(expected);
         expect(actual.warnings).toEqual([]);
+        expect(actual.sum).toEqual(10000);
     });
 
 });
