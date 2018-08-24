@@ -11,7 +11,7 @@ class App extends Component {
 
         this.state = {
             fileNames: [],
-            expense: [],
+            expense: {},
         }
 
         this.headerTerms = inverseObject(CONFIG.HEADER_TERMS);
@@ -53,8 +53,14 @@ class App extends Component {
      * @param arrays
      */
     calcExpense(arrays) {
-        return arrays.reduce((prev, current) => prev.concat(current)).reduce((prev, current) => {
+        const warnings = [];
+        const records = arrays.reduce((prev, current) => prev.concat(current)).reduce((prev, current, idx) => {
             const date = Moment(current.date, 'YYYY/MM/DD');
+            if (!date.isValid()) {
+                warnings.push({idx: idx, date: current.date, expenditure: current.expenditure});
+                console.warn(`Incorrect data, idx=${idx}, date=${current.date}`)
+                return prev;
+            }
             const key = date.year() + "/" + (date.month() + 1);
             let elem = prev.find(e => e.date === key);
             if (!elem) {
@@ -64,14 +70,14 @@ class App extends Component {
             elem.expenditure += ((current.expenditure ? parseInt(current.expenditure.replace(/,/g, '')) : 0) || 0);
             return prev;
         }, []);
+        return {records: records, warnings: warnings};
     }
-
 
     render() {
         return (
             <div>
                 <ButtonAppBar fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)}/>
-                <Expense tiers={this.state.expense}/>
+                <Expense expense={this.state.expense}/>
             </div>
         );
     }

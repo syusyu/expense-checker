@@ -36,17 +36,20 @@ class Expense extends Component {
     }
 
     render() {
-        const { classes, tiers } = this.props;
-        const noDataLabel = isEmpty(tiers) ? <Typography>Please select your expenditure csv files</Typography> : null;
+        const { classes, expense } = this.props;
+        const records = expense.records;
+        const noRecordLabel = isEmpty(records) ? <Typography>Please select your expenditure csv files</Typography> : null;
+        const warnings = expense.warnings;
+        const warningLabel = !isEmpty(warnings) ? <div>Warnings:</div> : null;
         return (
             <div>
-                {noDataLabel}
+                {noRecordLabel}
                 <Grid container spacing={40} alignItems="flex-end">
-                    {tiers.map(tier => (
-                        <Grid item key={tier.date} xs={12} sm={6} md={4}>
+                    {records.map(record => (
+                        <Grid item key={record.date} xs={12} sm={6} md={4}>
                             <Card>
                                 <CardHeader
-                                    title={tier.date}
+                                    title={record.date}
                                     titleTypographyProps={{ align: 'center' }}
                                     subheaderTypographyProps={{ align: 'center' }}
                                     className={classes.cardHeader}
@@ -54,7 +57,7 @@ class Expense extends Component {
                                 <CardContent>
                                     <div className={classes.cardPricing}>
                                         <Typography variant="display2" color="textPrimary">
-                                            {f.format(tier.expenditure)}
+                                            {f.format(record.expenditure)}
                                         </Typography>
                                     </div>
                                 </CardContent>
@@ -62,6 +65,10 @@ class Expense extends Component {
                         </Grid>
                     ))}
                 </Grid>
+                {warningLabel}
+                {warnings.map(warning => (
+                    <div>idx={warning.idx}, date={warning.date}, expenditure={warning.expenditure}</div>
+                ))}
             </div>
         );
     }
