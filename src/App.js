@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ButtonAppBar from './ButtonAppBar';
 import Expense from './Expense';
 import Papa from 'papaparse';
-import {inverseObject} from './Util';
+import {inverseObject, isEmpty} from './Util';
 import Moment from 'moment';
 
 class App extends Component {
@@ -16,6 +16,7 @@ class App extends Component {
 
         this.headerTerms = inverseObject(CONFIG.HEADER_TERMS);
         this.filterTerms = inverseObject(CONFIG.FILTER_TERMS);
+        this.colors = CONFIG.EXPENDITURE_LEVEL_COLORS;
     }
 
     updateFiles(e) {
@@ -27,6 +28,7 @@ class App extends Component {
             })
         });
     }
+
     parseCsv(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -36,16 +38,21 @@ class App extends Component {
                 for (const key of Object.keys(this.headerTerms)) {
                     content = content.replace(new RegExp(key, "g"), this.headerTerms[key])
                 }
-                for (const key of Object.keys(this.filterTerms)) {
-                    content = content.replace(new RegExp(key, "g"), this.filterTerms[key])
-                }
+                content = content.replace(/^$/g,'').replace(/^\r\n/g,'').replace(/^\n/g,'');
                 const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true});
+                if (!this.validateHeader(parsedData.data[0])) {
+                    reject('Incorrect header: ' + JSON.stringify(parsedData.data[0]));
+                }
                 resolve(parsedData.data);
             }
             reader.onerror = () => {
                 reject('csv load error: ' + file.name);
             };
         });
+    }
+
+    validateHeader(record) {
+        return record && record.date && record.expenditure;
     }
 
     /**
@@ -55,10 +62,12 @@ class App extends Component {
     calcExpense(arrays) {
         const warnings = [];
         const records = arrays.reduce((prev, current) => prev.concat(current)).reduce((prev, current, idx) => {
+            if (!this.filter(current.content)) {
+                return prev;
+            }
             const date = Moment(current.date, 'YYYY/MM/DD');
             if (!date.isValid()) {
-                warnings.push({idx: idx, date: current.date, expenditure: current.expenditure});
-                console.warn(`Incorrect data, idx=${idx}, date=${current.date}`)
+                warnings.push({line: (idx + 1), date: current.date, expenditure: current.expenditure});
                 return prev;
             }
             const key = date.year() + "/" + (date.month() + 1);
@@ -68,9 +77,34 @@ class App extends Component {
                 prev.push(elem);
             }
             elem.expenditure += ((current.expenditure ? parseInt(current.expenditure.replace(/,/g, '')) : 0) || 0);
+            elem.color = this.color(elem.expenditure);
             return prev;
         }, []);
-        return {records: records, warnings: warnings};
+        return {records: this.sort(records), warnings: warnings};
+    }
+
+    color (val) {
+        const result = '#EEEEEE';
+        if (!this.colors) return result;
+        for (const e of this.colors) {
+            if (!e.max && e.min <= val) {
+                return e.color;
+            } else if (e.min <= val && val < e.max) {
+                return e.color;
+            }
+        }
+        return result;
+    }
+
+    filter(content) {
+        if (isEmpty(CONFIG.FILTER_TERMS) || !content) {
+            return true;
+        }
+        return !CONFIG.FILTER_TERMS.includes(content);
+    }
+
+    sort(records) {
+        return records.sort((a, b) => Moment(a.date, 'YYYY/MM') < Moment(b.date, 'YYYY/MM') ? 1 : -1);
     }
 
     render() {

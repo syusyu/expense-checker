@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import {isEmpty} from "./Util";
+import Moment from 'moment';
+
 
 const styles = theme => ({
     heroContent: {
@@ -25,10 +27,13 @@ const styles = theme => ({
     },
 });
 
-const f = new Intl.NumberFormat('ja-JP', {
+const currencyFormat = new Intl.NumberFormat('ja-JP', {
     style: 'currency',
-    currency: 'JPY'
+    currency: (CONFIG.CURRENCY || 'JPY')
 });
+
+const dateFormat = CONFIG.DATE_FORMAT || 'YYYY/MM'
+
 
 class Expense extends Component {
     constructor(props) {
@@ -37,9 +42,9 @@ class Expense extends Component {
 
     render() {
         const { classes, expense } = this.props;
-        const records = expense.records;
+        const records = expense.records || [];
         const noRecordLabel = isEmpty(records) ? <Typography>Please select your expenditure csv files</Typography> : null;
-        const warnings = expense.warnings;
+        const warnings = expense.warnings || [];
         const warningLabel = !isEmpty(warnings) ? <div>Warnings:</div> : null;
         return (
             <div>
@@ -49,7 +54,7 @@ class Expense extends Component {
                         <Grid item key={record.date} xs={12} sm={6} md={4}>
                             <Card>
                                 <CardHeader
-                                    title={record.date}
+                                    title={Moment(record.date).format(dateFormat).toString()}
                                     titleTypographyProps={{ align: 'center' }}
                                     subheaderTypographyProps={{ align: 'center' }}
                                     className={classes.cardHeader}
@@ -57,7 +62,7 @@ class Expense extends Component {
                                 <CardContent>
                                     <div className={classes.cardPricing}>
                                         <Typography variant="display2" color="textPrimary">
-                                            {f.format(record.expenditure)}
+                                            {currencyFormat.format(record.expenditure)}
                                         </Typography>
                                     </div>
                                 </CardContent>
@@ -67,7 +72,7 @@ class Expense extends Component {
                 </Grid>
                 {warningLabel}
                 {warnings.map(warning => (
-                    <div>idx={warning.idx}, date={warning.date}, expenditure={warning.expenditure}</div>
+                    <div key={warning.line}>line={warning.line}, date={warning.date}, expenditure={warning.expenditure}</div>
                 ))}
             </div>
         );

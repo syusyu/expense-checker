@@ -1,4 +1,4 @@
-import {inverseObject, isEmpty} from './Util'
+import {inverseObject, isEmpty,rangeMap} from './Util'
 
 
 describe('Inverse object', () => {
@@ -24,4 +24,4 @@ describe('isEmpty', () => {
         expect(isEmpty([1])).toEqual(false);
         expect(isEmpty({a: "a"})).toEqual(false);
     })
-})
+});

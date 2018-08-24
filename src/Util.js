@@ -17,4 +17,3 @@ export const isEmpty = (obj) => {
     }
     return false;
 }
-
