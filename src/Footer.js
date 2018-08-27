@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import {isEmpty} from "./Util";
 import FileUpload from './FileUpload';
 
@@ -30,7 +27,7 @@ const styles = theme => ({
 });
 
 
-class ButtonAppBar extends Component {
+class Footer extends Component {
     constructor(props) {
         super(props);
     }
@@ -58,8 +55,8 @@ class ButtonAppBar extends Component {
 }
 
 
-ButtonAppBar.propTypes = {
+Footer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(Footer);
