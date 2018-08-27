@@ -14,6 +14,16 @@ const styles = theme => ({
         bottom: theme.spacing.unit * 2,
         right: theme.spacing.unit * 2,
     },
+    footer: {
+        backgroundColor: '#E1F5FE',
+        position: 'fixed',
+        width: '30%',
+        height: '45px',
+        bottom: theme.spacing.unit * 2,
+        padding: '10px 0px 10px 20px',
+        borderRadius: '10px',
+        opacity: '0.5',
+    }
 });
 
 
@@ -29,9 +39,6 @@ class ButtonAppBar extends Component {
         return (
             <div className={classes.root}>
 
-                {fileNames.map(fileName => (
-                    <span key={fileName} color={'#0000'}>{fileName}&nbsp;&nbsp;</span>
-                ))}
                 <label htmlFor="fab-button-file">
                     <input className={classes.input}  id="fab-button-file" multiple type="file"
                            onChange={e => updateFiles(e)}/>
@@ -39,6 +46,11 @@ class ButtonAppBar extends Component {
                         <AddIcon />
                     </Button>
                 </label>
+                <div className={classes.footer}>
+                    {fileNames.map(fileName => (
+                        <span key={fileName} color={'#0000'}>{fileName}&nbsp;&nbsp;</span>
+                    ))}
+                </div>
             </div>
         );
     }
