@@ -19,10 +19,13 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             },
-            {test: /\.css$/, use: ['style-loader', 'css-loader']}
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
         ]
     },
     plugins: [
-        new webpack.DefinePlugin({ CONFIG: JSON.stringify(require("./config/default")) })
+        new webpack.DefinePlugin({CONFIG: JSON.stringify(require("./config/default"))})
     ]
 }

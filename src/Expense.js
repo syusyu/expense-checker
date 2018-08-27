@@ -8,21 +8,15 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import {isEmpty} from "./Util";
 import Moment from 'moment';
+import FileUpload from './FileUpload';
 
 const styles = theme => ({
-    parent: {
-        height: '100%',
-        backgroundColor: 'red',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     cardExpenditure: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'baseline',
         marginBottom: theme.spacing.unit * 2,
-    },
+    }
 });
 
 const currencyFormat = new Intl.NumberFormat('ja-JP', {
@@ -39,15 +33,21 @@ class Expense extends Component {
     }
 
     render() {
-        const { classes, expense } = this.props;
+        const { classes, expense, updateFiles } = this.props;
         const records = expense.records || [];
         const warnings = expense.warnings || [];
         const sum = expense.sum;
+        const isFileSelected = !isEmpty(records);
 
         return (
             <div>
-                {isEmpty(records) ?
-                    <div className={classes.parent}><Typography variant="display4">Select CSV files</Typography></div> : null
+                {!isFileSelected ?
+                    <div>
+                        <Typography variant="display4">Select CSV files
+                            <FileUpload isFileSelected={isFileSelected} updateFiles={updateFiles} />
+                        </Typography>
+                    </div>
+                    : null
                 }
                 <Grid container spacing={40} alignItems="flex-end">
                     {records.map(record => (
@@ -70,7 +70,7 @@ class Expense extends Component {
                         </Grid>
                     ))}
                 </Grid>
-                {!isEmpty(records) ?
+                {isFileSelected ?
                     <Grid container spacing={40} direction="column" align="center" style={{height: 200}}>
                         <Grid item key='total' xs={12} sm={6} md={4}>
                             <Card>

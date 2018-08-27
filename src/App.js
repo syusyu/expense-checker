@@ -111,8 +111,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <ButtonAppBar fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)}/>
-                <Expense expense={this.state.expense}/>
+                <ButtonAppBar fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
+                <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
             </div>
         );
     }

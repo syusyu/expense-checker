@@ -1,9 +1,8 @@
-body {
-    height: 100%
+html, body {
+    height: 100%;
 }
 #root {
-    height: 100%;
-    background-color: red;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
