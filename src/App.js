@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ButtonAppBar from './ButtonAppBar';
+import Footer from './Footer';
 import Expense from './Expense';
 import Papa from 'papaparse';
 import {inverseObject, isEmpty} from './Util';
@@ -111,8 +111,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <ButtonAppBar fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
                 <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
+                <Footer fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
             </div>
         );
     }

@@ -30,8 +30,6 @@ const styles = theme => ({
 });
 
 
-
-
 class ButtonAppBar extends Component {
     constructor(props) {
         super(props);
@@ -42,7 +40,10 @@ class ButtonAppBar extends Component {
         const isFileSelected = !isEmpty(fileNames);
         return (
             <div>
-                <FileUpload isFileSelected={isFileSelected} updateFiles={updateFiles} />
+                {isFileSelected ?
+                    <FileUpload isFileSelected={isFileSelected} updateFiles={updateFiles} />
+                    : null
+                }
 
                 {isFileSelected ?
                     <div className={classes.footer}>

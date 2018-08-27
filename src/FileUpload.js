@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 import {isEmpty} from "./Util";
 
 const styles = theme => ({
@@ -33,7 +34,7 @@ class FileUpload extends Component {
                 <input className={classes.input}  id="fab-button-file" multiple type="file"
                        onChange={e => updateFiles(e)}/>
                 <Button component="span" variant="fab" className={iconClassName} color="primary">
-                    <AddIcon />
+                    {isFileSelected ? <EditIcon/> : <AddIcon />}
                 </Button>
             </label>
         );

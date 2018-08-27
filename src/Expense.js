@@ -44,7 +44,7 @@ class Expense extends Component {
                 {!isFileSelected ?
                     <div>
                         <Typography variant="display4">Select CSV files
-                            <FileUpload isFileSelected={isFileSelected} updateFiles={updateFiles} />
+                            <FileUpload isFileSelected={false} updateFiles={updateFiles} />
                         </Typography>
                     </div>
                     : null
