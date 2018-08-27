@@ -65,7 +65,7 @@ class App extends Component {
             const date = Moment(current.date, 'YYYY/MM/DD');
             if (!date.isValid()) {
                 if (current.date && current.expenditure) {
-                    warnings.push({line: (idx + 1), date: current.date, expenditure: current.expenditure});
+                    warnings.push({index: (idx + 1), date: current.date, expenditure: current.expenditure});
                 }
                 return prev;
             }
@@ -118,4 +118,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default App;

@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import {isEmpty} from "./Util";
 
 const styles = theme => ({
     input: {
@@ -15,14 +16,15 @@ const styles = theme => ({
         right: theme.spacing.unit * 2,
     },
     footer: {
-        backgroundColor: '#E1F5FE',
-        position: 'fixed',
         width: '30%',
         height: '45px',
-        bottom: theme.spacing.unit * 2,
+        backgroundColor: '#E1F5FE',
         padding: '10px 0px 10px 20px',
         borderRadius: '10px',
         opacity: '0.5',
+        position: 'fixed',
+        bottom: theme.spacing.unit * 2,
+        right: theme.spacing.unit * 10,
     }
 });
 
@@ -37,7 +39,7 @@ class ButtonAppBar extends Component {
     render() {
         const {classes, fileNames, updateFiles} = this.props;
         return (
-            <div className={classes.root}>
+            <div>
 
                 <label htmlFor="fab-button-file">
                     <input className={classes.input}  id="fab-button-file" multiple type="file"
@@ -46,11 +48,13 @@ class ButtonAppBar extends Component {
                         <AddIcon />
                     </Button>
                 </label>
-                <div className={classes.footer}>
-                    {fileNames.map(fileName => (
-                        <span key={fileName} color={'#0000'}>{fileName}&nbsp;&nbsp;</span>
-                    ))}
-                </div>
+                {!isEmpty(fileNames) ?
+                    <div className={classes.footer}>
+                        {fileNames.map((fileName, idx) => (
+                            <span key={fileName} color={'#0000'}>{fileName}&nbsp;&nbsp;</span>
+                        ))}
+                    </div>
+                : null}
             </div>
         );
     }

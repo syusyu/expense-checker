@@ -10,15 +10,14 @@ import {isEmpty} from "./Util";
 import Moment from 'moment';
 
 const styles = theme => ({
-    heroContent: {
-        maxWidth: 600,
-        margin: '0 auto',
-        padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
+    parent: {
+        height: '100%',
+        backgroundColor: 'red',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    cardHeader: {
-        backgroundColor: '#EEEEEE',
-    },
-    cardPricing: {
+    cardExpenditure: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'baseline',
@@ -48,7 +47,7 @@ class Expense extends Component {
         return (
             <div>
                 {isEmpty(records) ?
-                    <Typography>Please select your expenditure csv files</Typography> : null
+                    <div className={classes.parent}><Typography variant="display4">Select CSV files</Typography></div> : null
                 }
                 <Grid container spacing={40} alignItems="flex-end">
                     {records.map(record => (
@@ -59,10 +58,9 @@ class Expense extends Component {
                                     titleTypographyProps={{ align: 'center' }}
                                     subheaderTypographyProps={{ align: 'center' }}
                                     style={{backgroundColor: record.color}}
-                                    className={classes.cardHeader}
                                 />
                                 <CardContent>
-                                    <div className={classes.cardPricing}>
+                                    <div className={classes.cardExpenditure}>
                                         <Typography variant="display2" color="textPrimary">
                                             {currencyFormat.format(record.expenditure)}
                                         </Typography>
@@ -83,7 +81,7 @@ class Expense extends Component {
                                     style={{backgroundColor: '#0D47A1'}}
                                 />
                                 <CardContent>
-                                    <div className={classes.cardPricing}>
+                                    <div className={classes.cardExpenditure}>
                                         <Typography variant="display2" color="textPrimary">
                                             {currencyFormat.format(sum)}
                                         </Typography>
@@ -97,8 +95,8 @@ class Expense extends Component {
                 {!isEmpty(warnings) ? <div>Warnings:</div> : null}
 
                 {warnings.map(warning => (
-                    <div key={warning.line}>
-                        line={warning.line}, date={warning.date}, expenditure={warning.expenditure}
+                    <div key={warning.index}>
+                        index={warning.index}, date={warning.date}, expenditure={warning.expenditure}
                     </div>
                 ))}
             </div>
