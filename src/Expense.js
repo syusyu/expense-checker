@@ -9,7 +9,6 @@ import { withStyles } from '@material-ui/core/styles';
 import {isEmpty} from "./Util";
 import Moment from 'moment';
 
-
 const styles = theme => ({
     heroContent: {
         maxWidth: 600,
@@ -44,6 +43,7 @@ class Expense extends Component {
         const { classes, expense } = this.props;
         const records = expense.records || [];
         const warnings = expense.warnings || [];
+        const sum = expense.sum;
 
         return (
             <div>
@@ -71,8 +71,10 @@ class Expense extends Component {
                             </Card>
                         </Grid>
                     ))}
-                    {!isEmpty(records) ?
-                        <Grid item key='total' xs={12} sm={12} md={12}>
+                </Grid>
+                {!isEmpty(records) ?
+                    <Grid container spacing={40} direction="column" align="center" style={{height: 200}}>
+                        <Grid item key='total' xs={12} sm={6} md={4}>
                             <Card>
                                 <CardHeader
                                     title='Total'
@@ -83,14 +85,14 @@ class Expense extends Component {
                                 <CardContent>
                                     <div className={classes.cardPricing}>
                                         <Typography variant="display2" color="textPrimary">
-                                            {currencyFormat.format(expense.sum)}
+                                            {currencyFormat.format(sum)}
                                         </Typography>
                                     </div>
                                 </CardContent>
                             </Card>
-                        </Grid> : null
-                    }
-                </Grid>
+                        </Grid>
+                    </Grid> : null
+                }
 
                 {!isEmpty(warnings) ? <div>Warnings:</div> : null}
 

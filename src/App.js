@@ -64,7 +64,9 @@ class App extends Component {
             }
             const date = Moment(current.date, 'YYYY/MM/DD');
             if (!date.isValid()) {
-                warnings.push({line: (idx + 1), date: current.date, expenditure: current.expenditure});
+                if (current.date && current.expenditure) {
+                    warnings.push({line: (idx + 1), date: current.date, expenditure: current.expenditure});
+                }
                 return prev;
             }
             const key = date.year() + "-" + ('0' + (date.month() + 1)).slice(-2);
