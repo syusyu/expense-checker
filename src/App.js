@@ -25,7 +25,9 @@ class App extends Component {
             this.setState({
                 fileNames: fileNames,
                 expense: this.calcExpense(result),
-            })
+            });
+            const root = document.getElementById('root');
+            root.classList.remove('root');
         });
     }
 
@@ -44,7 +46,7 @@ class App extends Component {
                     reject('Incorrect header: ' + JSON.stringify(parsedData.data[0]));
                 }
                 resolve(parsedData.data);
-            }
+            };
             reader.onerror = () => {
                 reject('csv load error: ' + file.name);
             };

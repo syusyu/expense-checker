@@ -16,12 +16,10 @@ const styles = theme => ({
         justifyContent: 'center',
         alignItems: 'baseline',
         marginBottom: theme.spacing.unit * 2,
-        color: '#BDBDBD',
     },
     cardTotal: {
         border: "solid 3px #78909C",
-        color: '#BDBDBD',
-    }
+    },
 });
 
 const currencyFormat = new Intl.NumberFormat('ja-JP', {
