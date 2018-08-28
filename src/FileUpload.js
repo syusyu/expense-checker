@@ -41,4 +41,11 @@ class FileUpload extends Component {
     }
 }
 
+FileUpload.propTypes = {
+    classes: PropTypes.object.isRequired,
+    isFileSelected: PropTypes.bool.isRequired,
+    updateFiles: PropTypes.func.isRequired,
+};
+
+
 export default withStyles(styles)(FileUpload);

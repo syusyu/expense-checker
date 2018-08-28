@@ -57,6 +57,8 @@ class Footer extends Component {
 
 Footer.propTypes = {
     classes: PropTypes.object.isRequired,
+    fileNames: PropTypes.array.isRequired,
+    updateFiles: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Footer);
