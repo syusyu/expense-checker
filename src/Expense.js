@@ -16,9 +16,11 @@ const styles = theme => ({
         justifyContent: 'center',
         alignItems: 'baseline',
         marginBottom: theme.spacing.unit * 2,
+        color: '#BDBDBD',
     },
     cardTotal: {
-        
+        border: "solid 3px #78909C",
+        color: '#BDBDBD',
     }
 });
 
@@ -74,14 +76,15 @@ class Expense extends Component {
                     ))}
                     {isFileSelected ?
                         <Grid item key='total' xs={12} sm={6} md={4}>
-                            <Card>
+                            <Card className={classes.cardTotal}>
                                 <CardHeader
                                     title='Total'
                                     titleTypographyProps={{ align: 'center' }}
                                     subheaderTypographyProps={{ align: 'center' }}
-                                    style={{backgroundColor: '#0D47A1', color: 'grey'}}
+                                    style={{backgroundColor: '#BDBDBD'}}
                                 />
-                                <CardContent>
+                                <CardContent
+                                    style={{backgroundColor: '#F5F5F5'}}>
                                     <div className={classes.cardExpenditure}>
                                         <Typography variant="display2" color="textPrimary">
                                             {currencyFormat.format(sum)}

@@ -45,7 +45,7 @@ class Footer extends Component {
                 {isFileSelected ?
                     <div className={classes.footer}>
                         {fileNames.map((fileName, idx) => (
-                            <span key={fileName} color={'#0000'}>{fileName}&nbsp;&nbsp;</span>
+                            <span key={fileName} color={'#0000'}>&lt;{fileName}&gt;&nbsp;&nbsp;</span>
                         ))}
                     </div>
                 : null}
