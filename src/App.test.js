@@ -1,12 +1,11 @@
 import React from 'react';
 import App from './App';
 
-
+CONFIG.EXPENDITURE_LEVEL_COLORS = null;
 const app = new App();
 
 // Too many files
 // Too many records
-
 
 describe('Calculate expense', () => {
     it('Single Normal', () => {
@@ -52,7 +51,7 @@ describe('Calculate expense', () => {
         const param = [[{date: '2018/08/32', expenditure: "1000", class: '', foo: 'bar'}]];
         const actual = app.calcExpense(param);
         expect(actual.records).toEqual([]);
-        expect(actual.warnings).toEqual([{line: 1, date: '2018/08/32', expenditure: '1000'}]);
+        expect(actual.warnings).toEqual([{index: 1, date: '2018/08/32', expenditure: '1000'}]);
         expect(actual.sum).toEqual(0);
     });
 
