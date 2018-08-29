@@ -10,8 +10,10 @@ const dummyUpdateFilesFunc = () => {};
 
 describe('<Footer />', () => {
     it('Footer input file field', () => {
-        const fileNames = null;
-        const wrapper = mount(<Footer classes={dummyClasses} isFileSelected={isFileSelected} updateFiles={dummyUpdateFilesFunc} />);
-        expect(wrapper.find('input').prop('type')).toEqual('file');
+        const fileNames = [];
+        const wrapper = mount(<Footer classes={dummyClasses} fileNames={fileNames} updateFiles={dummyUpdateFilesFunc} />);
+        expect(wrapper.html()).toEqual(null);
+        expect(wrapper.exists('div')).toEqual(false);
+        expect(wrapper.exists('FileUpload')).toEqual(false);
     });
 });
