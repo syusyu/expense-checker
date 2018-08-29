@@ -1,4 +1,4 @@
-import {inverseObject, isEmpty,rangeMap} from './Util'
+import {inverseObject, isEmpty,rangeMap} from '../src/Util'
 
 
 describe('Inverse object', () => {

@@ -47,5 +47,4 @@ FileUpload.propTypes = {
     updateFiles: PropTypes.func.isRequired,
 };
 
-
 export default withStyles(styles)(FileUpload);
