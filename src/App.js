@@ -4,6 +4,8 @@ import Expense from './Expense';
 import Papa from 'papaparse';
 import {inverseObject, isEmpty} from './Util';
 import Moment from 'moment';
+import Typography from '@material-ui/core/Typography';
+import FileUpload from './FileUpload';
 
 class App extends Component {
     constructor(props) {
@@ -113,7 +115,15 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
+                {isEmpty(this.state.expense.records) ?
+                    <div>
+                        <Typography variant="display4">Select CSV files
+                            <FileUpload isFileSelected={false} updateFiles={(e) => this.updateFiles(e)} />
+                        </Typography>
+                    </div>
+                    :
+                    <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
+                }
                 <Footer fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
             </div>
         );

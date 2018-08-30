@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import {isEmpty} from "./Util";
 import Moment from 'moment';
-import FileUpload from './FileUpload';
 
 const styles = theme => ({
     cardExpenditure: {
@@ -27,7 +26,7 @@ const currencyFormat = new Intl.NumberFormat('ja-JP', {
     currency: (CONFIG.CURRENCY || 'JPY')
 });
 
-const dateFormat = CONFIG.DATE_FORMAT || 'YYYY/MM'
+const dateFormat = CONFIG.DATE_FORMAT || 'YYYY/MM';
 
 
 class Expense extends Component {
@@ -36,22 +35,13 @@ class Expense extends Component {
     }
 
     render() {
-        const { classes, expense, updateFiles } = this.props;
+        const { classes, expense } = this.props;
         const records = expense.records || [];
         const warnings = expense.warnings || [];
         const sum = expense.sum;
-        const isFileSelected = !isEmpty(records);
 
         return (
             <div>
-                {!isFileSelected ?
-                    <div>
-                        <Typography variant="display4">Select CSV files
-                            <FileUpload isFileSelected={false} updateFiles={updateFiles} />
-                        </Typography>
-                    </div>
-                    : null
-                }
                 <Grid container spacing={40} alignItems="flex-end">
                     {records.map(record => (
                         <Grid item key={record.date} xs={12} sm={6} md={4}>
@@ -72,30 +62,27 @@ class Expense extends Component {
                             </Card>
                         </Grid>
                     ))}
-                    {isFileSelected ?
-                        <Grid item key='total' xs={12} sm={6} md={4}>
-                            <Card className={classes.cardTotal}>
-                                <CardHeader
-                                    title='Total'
-                                    titleTypographyProps={{ align: 'center' }}
-                                    subheaderTypographyProps={{ align: 'center' }}
-                                    style={{backgroundColor: '#BDBDBD'}}
-                                />
-                                <CardContent
-                                    style={{backgroundColor: '#F5F5F5'}}>
-                                    <div className={classes.cardExpenditure}>
-                                        <Typography variant="display2" color="textPrimary">
-                                            {currencyFormat.format(sum)}
-                                        </Typography>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Grid> : null
-                    }
+                    <Grid item key='total' xs={12} sm={6} md={4}>
+                        <Card className={classes.cardTotal}>
+                            <CardHeader
+                                title='Total'
+                                titleTypographyProps={{ align: 'center' }}
+                                subheaderTypographyProps={{ align: 'center' }}
+                                style={{backgroundColor: '#BDBDBD'}}
+                            />
+                            <CardContent
+                                style={{backgroundColor: '#F5F5F5'}}>
+                                <div className={classes.cardExpenditure}>
+                                    <Typography variant="display2" color="textPrimary">
+                                        {currencyFormat.format(sum)}
+                                    </Typography>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
 
-                {!isEmpty(warnings) ? <div>Warnings:</div> : null}
-
+                {!isEmpty(warnings) ?<div>Warnings:</div> : null}
                 {warnings.map(warning => (
                     <div key={warning.index}>
                         index={warning.index}, date={warning.date}, expenditure={warning.expenditure}
@@ -111,9 +98,9 @@ Expense.propTypes = {
     fileNames: PropTypes.array,
     expense: PropTypes.object.isRequired,
     expense: PropTypes.shape({
-        records: PropTypes.array,
+        records: PropTypes.array.isRequired,
         warnings: PropTypes.array,
-        sum: PropTypes.number,
+        sum: PropTypes.number.isRequired,
     }),
 };
 

@@ -9,7 +9,7 @@ const dummyClasses = {};
 const dummyUpdateFilesFunc = () => {};
 
 describe('<Footer />', () => {
-    it('Footer is empty', () => {
+    it('Footer is NOT shown', () => {
         const fileNames = [];
         const wrapper = mount(<Footer classes={dummyClasses} fileNames={fileNames} updateFiles={dummyUpdateFilesFunc} />);
         expect(wrapper.html()).toEqual(null);
