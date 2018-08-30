@@ -1,18 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../src/App';
 import Expense from '../src/Expense';
-import FileUpload from '../src/FileUpload';
 import  { configure, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-describe('<App />', () => {
-    it('Existing child component (App)', () => {
-        const wrapper = shallow(<App />);
-        // expect(wrapper.find(FileUpload)).toBe(1);
+const dummyClasses = {};
+
+describe('<Expense />', () => {
+    it('Show expenditure', () => {
+        const fileNames = ['foo', 'bar'];
+        const expense = {
+            records: [
+                {date: '2018/08', expenditure: 1000},
+                {date: '2018/07', expenditure: 2000},
+            ]
+        }
+        const wrapper = shallow(<Expense />);
     });
 });
 

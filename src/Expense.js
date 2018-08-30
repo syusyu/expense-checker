@@ -99,6 +99,11 @@ Expense.propTypes = {
     expense: PropTypes.object.isRequired,
     expense: PropTypes.shape({
         records: PropTypes.array.isRequired,
+        records: PropTypes.shape({
+            date: PropTypes.string.isRequired,
+            expenditure: PropTypes.number.isRequired,
+            color: PropTypes.string.isRequired,
+        }),
         warnings: PropTypes.array,
         sum: PropTypes.number.isRequired,
     }),
