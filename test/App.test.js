@@ -8,10 +8,26 @@ configure({ adapter: new Adapter() });
 
 describe('[UI] <App />', () => {
     it('Initial state', () => {
-        const wrapper = shallow(<App />);
-        expect(wrapper.state('fileNames')).toEqual([]);
-        expect(wrapper.state('expense')).toEqual({});
+        const wrapper = mount(<App />);
+        expect(wrapper.find('h1').text()).toEqual('Select CSV files');
     });
+
+    it('Set state', () => {
+        const expense = {
+            records: [
+                {date: '2018-08-01', expenditure: 1000, color: '#EEEEEE'},
+                {date: '2018-07-01', expenditure: 2000, color: '#EEEEEE'},
+            ],
+            sum: 3000,
+        };
+        const wrapper = mount(<App />);
+        wrapper.setState({expense: expense, fileNames: ['foo']});
+        const months = wrapper.find('CardHeader span').map(node => node.text());
+        const expenditures = wrapper.find('CardContent h1').map(node => node.text());
+        expect(months).toEqual(['2018/08', '2018/07', 'Total']);
+        expect(expenditures).toEqual(['JP¥ 1,000', 'JP¥ 2,000', 'JP¥ 3,000', ]);
+    });
+
 });
 
 
