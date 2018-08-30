@@ -28,7 +28,6 @@ const currencyFormat = new Intl.NumberFormat('ja-JP', {
 
 const dateFormat = CONFIG.DATE_FORMAT || 'YYYY/MM';
 
-
 class Expense extends Component {
     constructor(props) {
         super(props);
@@ -95,15 +94,16 @@ class Expense extends Component {
 
 Expense.propTypes = {
     classes: PropTypes.object.isRequired,
-    fileNames: PropTypes.array,
     expense: PropTypes.object.isRequired,
     expense: PropTypes.shape({
-        records: PropTypes.array.isRequired,
-        records: PropTypes.shape({
-            date: PropTypes.string.isRequired,
-            expenditure: PropTypes.number.isRequired,
-            color: PropTypes.string.isRequired,
-        }),
+        records: PropTypes.arrayOf.isRequired,
+        records: PropTypes.arrayOf(
+            PropTypes.shape({
+                date: PropTypes.string.isRequired,
+                expenditure: PropTypes.number.isRequired,
+                color: PropTypes.string.isRequired,
+            }),
+        ),
         warnings: PropTypes.array,
         sum: PropTypes.number.isRequired,
     }),

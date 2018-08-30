@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Expense from '../src/Expense';
 import  { configure, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
+import Expense from '../src/Expense';
 
 configure({ adapter: new Adapter() });
 
@@ -11,14 +11,16 @@ const dummyClasses = {};
 
 describe('<Expense />', () => {
     it('Show expenditure', () => {
-        const fileNames = ['foo', 'bar'];
         const expense = {
             records: [
-                {date: '2018/08', expenditure: 1000},
-                {date: '2018/07', expenditure: 2000},
-            ]
-        }
-        const wrapper = shallow(<Expense />);
+                {date: '2018/08', expenditure: 1000, color: '#EEEEEE'},
+                {date: '2018/07', expenditure: 2000, color: '#EEEEEE'},
+            ],
+            sum: 3000,
+        };
+
+        const wrapper = shallow(<Expense expense={expense} classes={dummyClasses} />);
+        // console.log(`html=${wrapper.html()}`);
     });
 });
 

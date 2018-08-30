@@ -1,5 +1,8 @@
 
 export const inverseObject = (obj) => {
+    if (!obj) {
+        return {};
+    }
     return Object.keys(obj).reduceRight((prev, key) => {
         return (prev[obj[key]] = key, prev);
     }, {});

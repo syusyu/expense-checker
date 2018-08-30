@@ -1,3 +1,3 @@
-global.CONFIG = require("./config/default");
-
+// global.CONFIG = require("./config/test");
+global.CONFIG = {};
 

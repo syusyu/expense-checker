@@ -12,6 +12,11 @@ describe('Inverse object', () => {
         const param = {};
         expect(inverseObject(param)).toEqual(expected);
     });
+    it('Null', () => {
+        const expected = {};
+        const param = null;
+        expect(inverseObject(param)).toEqual(expected);
+    });
 });
 
 describe('isEmpty', () => {

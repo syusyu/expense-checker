@@ -1,7 +1,6 @@
 import React from 'react';
 import App from '../src/App';
 
-CONFIG.EXPENDITURE_LEVEL_COLORS = null;
 const app = new App();
 
 // Too many files
