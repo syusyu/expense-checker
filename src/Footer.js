@@ -25,17 +25,16 @@ class Footer extends Component {
 
     render() {
         const {classes, fileNames, updateFiles} = this.props;
-        const isFileSelected = !isEmpty(fileNames);
-        const result = isFileSelected ?
-                <div>
-                    <FileUpload isFileSelected={isFileSelected} updateFiles={updateFiles} />
-                    <div className={classes.footer}>
-                        {fileNames.map((fileName, idx) => (
-                            <span key={fileName} color={'#0000'}>&lt;{fileName}&gt;&nbsp;&nbsp;</span>
-                        ))}
-                    </div>
-                </div> : null;
-        return result;
+        return (
+            <div>
+                <FileUpload isFileSelected={true} updateFiles={updateFiles} />
+                <div className={classes.footer}>
+                    {fileNames.map((fileName, idx) => (
+                        <span key={fileName} color={'#0000'}>&lt;{fileName}&gt;&nbsp;&nbsp;</span>
+                    ))}
+                </div>
+            </div>
+        );
     }
 }
 

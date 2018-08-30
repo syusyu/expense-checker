@@ -14,7 +14,7 @@ class App extends Component {
         this.state = {
             fileNames: [],
             expense: {},
-        }
+        };
 
         this.headerTerms = inverseObject(CONFIG.HEADER_TERMS);
         this.filterTerms = inverseObject(CONFIG.FILTER_TERMS);
@@ -122,9 +122,11 @@ class App extends Component {
                         </Typography>
                     </div>
                     :
-                    <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
+                    <div>
+                        <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
+                        <Footer fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
+                    </div>
                 }
-                <Footer fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
             </div>
         );
     }

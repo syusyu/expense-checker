@@ -9,13 +9,6 @@ const dummyClasses = {};
 const dummyUpdateFilesFunc = () => {};
 
 describe('<Footer />', () => {
-    it('Footer is NOT shown', () => {
-        const fileNames = [];
-        const wrapper = mount(<Footer classes={dummyClasses} fileNames={fileNames} updateFiles={dummyUpdateFilesFunc} />);
-        expect(wrapper.html()).toEqual(null);
-        expect(wrapper.exists('div')).toEqual(false);
-        expect(wrapper.exists('FileUpload')).toEqual(false);
-    });
     it('Footer is shown', () => {
         const fileNames = ['foo.csv', 'bar.csv'];
         const wrapper = mount(<Footer classes={dummyClasses} fileNames={fileNames} updateFiles={dummyUpdateFilesFunc} />);

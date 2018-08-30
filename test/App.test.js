@@ -1,12 +1,23 @@
 import React from 'react';
 import App from '../src/App';
+import  { configure, mount, shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
+
+describe('[UI] <App />', () => {
+    it('Initial state', () => {
+        const wrapper = shallow(<App />);
+        expect(wrapper.state('fileNames')).toEqual([]);
+        expect(wrapper.state('expense')).toEqual({});
+    });
+});
+
 
 const app = new App();
 
-// Too many files
-// Too many records
-
-describe('Calculate expense', () => {
+describe('[Logic] Calculate expense', () => {
     it('Single Normal', () => {
         const param = [
             [

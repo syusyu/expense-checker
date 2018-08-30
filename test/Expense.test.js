@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import  { configure, shallow } from 'enzyme';
+import  { configure, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 import Expense from '../src/Expense';
-import {mount} from "enzyme/build/index";
 
 configure({ adapter: new Adapter() });
 
