@@ -6,6 +6,14 @@ import {inverseObject, isEmpty} from './Util';
 import Moment from 'moment';
 import Typography from '@material-ui/core/Typography';
 import FileUpload from './FileUpload';
+import Error from './Error';
+
+const styles = theme => ({
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
 
 class App extends Component {
     constructor(props) {
@@ -14,11 +22,21 @@ class App extends Component {
         this.state = {
             fileNames: [],
             expense: {},
+            error: {},
         };
 
         this.headerTerms = inverseObject(CONFIG.HEADER_TERMS);
         this.filterTerms = inverseObject(CONFIG.FILTER_TERMS);
         this.colors = CONFIG.EXPENDITURE_LEVEL_COLORS;
+    }
+
+    closeError(event, reason) {
+        if (reason === 'clickaway') {
+            return;
+        }
+        this.setState({
+            error: {},
+        });
     }
 
     updateFiles(e) {
@@ -30,6 +48,12 @@ class App extends Component {
             });
             const root = document.getElementById('root');
             root.classList.remove('root');
+        }, error => {
+            this.setState({
+                error: {
+                    message: error,
+                },
+            });
         });
     }
 
@@ -44,13 +68,16 @@ class App extends Component {
                 }
                 content = content.replace(/^$/g,'').replace(/^\r\n/g,'').replace(/^\n/g,'');
                 const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true});
+                if (!isEmpty(parsedData.errors)) {
+                    reject(`File '${file.name}' couldn't be parsed.  ${parsedData.errors.map(e => e.message)}`);
+                }
                 if (!this.validateHeader(parsedData.data[0])) {
                     reject('Incorrect header: ' + JSON.stringify(parsedData.data[0]));
                 }
                 resolve(parsedData.data);
             };
             reader.onerror = () => {
-                reject('csv load error: ' + file.name);
+                reject('Csv load error: ' + file.name);
             };
         });
     }
@@ -113,6 +140,7 @@ class App extends Component {
     }
 
     render() {
+        const showsError = !isEmpty(this.state.error);
         return (
             <div>
                 {isEmpty(this.state.expense.records) ?
@@ -126,6 +154,11 @@ class App extends Component {
                         <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
                         <Footer fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
                     </div>
+                }
+                {showsError ?
+                    <Error error={this.state.error} showsError={showsError} closeError={(e, reason) => this.closeError(e, reason)} />
+                    :
+                    null
                 }
             </div>
         );

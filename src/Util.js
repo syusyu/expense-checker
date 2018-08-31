@@ -12,6 +12,9 @@ export const isEmpty = (obj) => {
     if (!obj) {
         return true;
     }
+    if (obj === undefined) {
+        return true;
+    }
     if (Array.isArray(obj)) {
         return obj.length < 1;
     }
