@@ -66,10 +66,9 @@ class App extends Component {
                 for (const key of Object.keys(this.headerTerms)) {
                     content = content.replace(new RegExp(key, "g"), this.headerTerms[key])
                 }
-                content = content.replace(/^$/g,'').replace(/^\r\n/g,'').replace(/^\n/g,'');
-                const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true});
+                const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true, skipEmptyLines: true});
                 if (!isEmpty(parsedData.errors)) {
-                    reject(`File '${file.name}' couldn't be parsed.  ${parsedData.errors.map(e => e.message)}`);
+                    reject(`File '${file.name}' error!!  ${parsedData.errors.map(e => `${e.message} [${e.row}]`)}`);
                 }
                 if (!this.validateHeader(parsedData.data[0])) {
                     reject('Incorrect header: ' + JSON.stringify(parsedData.data[0]));
