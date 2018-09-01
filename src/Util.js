@@ -6,13 +6,10 @@ export const inverseObject = (obj) => {
     return Object.keys(obj).reduceRight((prev, key) => {
         return (prev[obj[key]] = key, prev);
     }, {});
-}
+};
 
 export const isEmpty = (obj) => {
     if (!obj) {
-        return true;
-    }
-    if (obj === undefined) {
         return true;
     }
     if (Array.isArray(obj)) {
@@ -22,4 +19,4 @@ export const isEmpty = (obj) => {
         return Object.keys(obj).length < 1;
     }
     return false;
-}
+};
