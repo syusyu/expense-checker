@@ -94,19 +94,17 @@ class Expense extends Component {
 
 Expense.propTypes = {
     classes: PropTypes.object.isRequired,
-    expense: PropTypes.object.isRequired,
     expense: PropTypes.shape({
-        records: PropTypes.arrayOf.isRequired,
         records: PropTypes.arrayOf(
             PropTypes.shape({
                 date: PropTypes.string.isRequired,
                 expenditure: PropTypes.number.isRequired,
                 color: PropTypes.string.isRequired,
             }),
-        ),
+        ).isRequired,
         warnings: PropTypes.array,
         sum: PropTypes.number.isRequired,
-    }),
+    }).isRequired,
 };
 
 export default withStyles(styles)(Expense);

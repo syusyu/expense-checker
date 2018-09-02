@@ -43,10 +43,9 @@ class Error extends React.Component {
 
 Error.propTypes = {
     classes: PropTypes.object.isRequired,
-    error: PropTypes.object.isRequired,
     error: PropTypes.shape({
         message: PropTypes.string,
-    }),
+    }).isRequired,
     showsError: PropTypes.bool,
     closeError: PropTypes.func.isRequired,
 };
