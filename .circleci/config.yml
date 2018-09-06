@@ -31,18 +31,18 @@ jobs:
       - run: yarn test
 
   deploy:
-      working_directory: ~/repo
-      context: aws-access
-      environment:
-        - AWS_S3_BUCKET_NAME: sum-monthly-expense
-      docker:
-        - image: innovatorjapan/awscli:latest
-      steps:
-        - checkout
-        - run:
-            name: Deploy to S3.
-            command: |
-                aws s3 sync ~/repo/dist/ s3://${AWS_S3_BUCKET_NAME}/ --exact-timestamps --delete
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:2.7-jessie
+    steps:
+      - checkout
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws s3 sync dist s3://sum-monthly-expense/ --delete
+
 workflows:
   version: 2
   build-deploy:
