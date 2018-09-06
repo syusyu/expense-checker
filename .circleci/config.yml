@@ -32,6 +32,7 @@ jobs:
 
   deploy:
       working_directory: ~/repo
+      context: aws-access
       environment:
         - AWS_S3_BUCKET_NAME: sum-monthly-expense
       docker:
