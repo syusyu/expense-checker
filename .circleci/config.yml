@@ -28,8 +28,10 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
+      - run:
+          name: Build
+          command: yarn run build
       - run: yarn test
-      - run: yarn build
 
   deploy:
     working_directory: ~/repo
