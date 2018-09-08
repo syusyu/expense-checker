@@ -144,7 +144,7 @@ class App extends Component {
             <div>
                 {isEmpty(this.state.expense.records) ?
                     <div>
-                        <Typography variant="display4">Select your expenditure files
+                        <Typography variant="display4">Put your expenditure files
                             <FileUpload isFileSelected={false} updateFiles={(e) => this.updateFiles(e)} />
                         </Typography>
                     </div>
