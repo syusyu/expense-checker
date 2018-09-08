@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe('[UI] <App />', () => {
     it('Initial state', () => {
         const wrapper = mount(<App />);
-        expect(wrapper.find('h1').text()).toEqual('Select your expenditure files');
+        expect(wrapper.find('h1').text()).toEqual('Put your expenditure files');
     });
 
     it('Set state', () => {
