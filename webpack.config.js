@@ -1,6 +1,15 @@
 const path = require('path');
 const webpack = require("webpack")
 
+let conf = {};
+try {
+    conf = JSON.stringify(require("./config/default"));
+} catch (e) {
+    console.log(e);
+    conf = {};
+}
+
+
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
@@ -26,6 +35,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.DefinePlugin({CONFIG: JSON.stringify(require("./config/default"))})
+        new webpack.DefinePlugin({CONFIG: conf})
     ]
 }
