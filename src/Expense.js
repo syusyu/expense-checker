@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import {isEmpty} from "./Util";
 import Moment from 'moment';
+import Footer from './Footer';
 
 const styles = theme => ({
     cardExpenditure: {
@@ -34,7 +35,7 @@ class Expense extends Component {
     }
 
     render() {
-        const { classes, expense } = this.props;
+        const { classes, expense, updateFiles } = this.props;
         const records = expense.records || [];
         const warnings = expense.warnings || [];
         const sum = expense.sum;
@@ -87,6 +88,8 @@ class Expense extends Component {
                         index={warning.index}, date={warning.date}, expenditure={warning.expenditure}
                     </div>
                 ))}
+
+                <Footer fileNames={this.state.fileNames} updateFiles={updateFiles} />
             </div>
         );
     }
@@ -105,6 +108,7 @@ Expense.propTypes = {
         warnings: PropTypes.array,
         sum: PropTypes.number.isRequired,
     }).isRequired,
+    updateFiles: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Expense);

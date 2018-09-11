@@ -4,16 +4,8 @@ import Expense from './Expense';
 import Papa from 'papaparse';
 import {inverseObject, isEmpty} from './Util';
 import Moment from 'moment';
-import Typography from '@material-ui/core/Typography';
-import FileUpload from './FileUpload';
 import Error from './Error';
-
-const styles = theme => ({
-    close: {
-        width: theme.spacing.unit * 4,
-        height: theme.spacing.unit * 4,
-    },
-});
+import Cover from './Cover';
 
 class App extends Component {
     constructor(props) {
@@ -46,8 +38,6 @@ class App extends Component {
                 fileNames: fileNames,
                 expense: this.calcExpense(result),
             });
-            const root = document.getElementById('root');
-            root.classList.remove('root');
         }, error => {
             this.setState({
                 error: {
@@ -143,16 +133,9 @@ class App extends Component {
         return (
             <div>
                 {isEmpty(this.state.expense.records) ?
-                    <div>
-                        <Typography variant="display4">Put your expenditure files
-                            <FileUpload isFileSelected={false} updateFiles={(e) => this.updateFiles(e)} />
-                        </Typography>
-                    </div>
+                    <Cover updateFiles={(e) => this.updateFiles(e)}/>
                     :
-                    <div>
-                        <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
-                        <Footer fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
-                    </div>
+                    <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
                 }
                 {showsError ?
                     <Error error={this.state.error} showsError={showsError} closeError={(e, reason) => this.closeError(e, reason)} />
