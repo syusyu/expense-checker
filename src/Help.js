@@ -1,37 +1,80 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {isEmpty} from "./Util";
-import FileUpload from './FileUpload';
 import animateScroll from 'animated-scroll-to';
+import Plx from 'react-plx';
 
 
-const styles = theme => ({
+const styles = {
+    plxTrigger: {
+        marginTop: '250vh',
+        border: 'solid 1px red',
+    },
     help: {
-        backgroundColor: '#d3d3d3',
-        marginTop: '100rem',
-        paddingBottom: '100rem',
-    },
-    content: {
-        margin: 'auto',
-        maxWidth: '60rem',
-        padding: '5rem 2rem',
-        position: 'relative',
-        textAlign: 'center',
-        width: '100%',
-    },
-    h1: {
-        fontSize: '4em',
-        margin: '0',
-    },
-    h2: {
+        // backgroundColor: '#d3d3d3',
+        // marginTop: '250vh',
+        // paddingBottom: '100rem',
 
+        bottom: 0,
+        left: 0,
+        // maxWidth: '54rem',
+        // opacity: '0',
+        // padding: '0 2rem',
+        position: 'fixed',
+        // width: '100%',
+    },
+
+
+
+
+    helpTemporal: {
+        border: 'solid 1px black',
     }
-});
+};
+
+
+
+const textData = [
+    {
+        start: '#plx-trigger',
+        duration: '60vh',
+        properties: [
+            {
+                startValue: 0,
+                endValue: -50,
+                unit: 'vh',
+                property: 'translateY',
+            },
+            {
+                startValue: 0,
+                endValue: 1,
+                property: 'opacity',
+            },
+        ],
+    },
+    // {
+    //     start: '.StickyText-trigger',
+    //     startOffset: '60vh',
+    //     duration: '30vh',
+    //     properties: [
+    //         {
+    //             startValue: -50,
+    //             endValue: -100,
+    //             unit: 'vh',
+    //             property: 'translateY',
+    //         },
+    //         {
+    //             startValue: 1,
+    //             endValue: 0,
+    //             property: 'opacity',
+    //         },
+    //     ],
+    // },
+];
 
 class Help extends Component {
     handleScrollTop() {
-        animateScroll(0, { minDuration: 3000 });
+        animateScroll(0, { minDuration: 1000 });
     }
 
     constructor(props) {
@@ -41,18 +84,16 @@ class Help extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div className={classes.help}>
-                <div className={classes.content}>
-                    <h1 className={classes.h1}>Plx</h1>
-                    <h2>React Parallax component</h2>
-                    <div>Awesome isn&#39;t it?</div>
-                    <div className='Footer-links'>
-                        <a href='https://stanko.github.io'>My blog</a>
-                        <a href='https://www.npmjs.com/package/react-plx'>npm</a>
-                        <a href='https://github.com/Stanko/react-plx'>GitHub</a>
-                    </div>
-                    <button onClick={ () => this.handleScrollTop() }>Back to top</button>
+            <div style={styles.helpTemporal}>
+                <div id="plx-trigger" style={styles.plxTrigger}>
+                    trigger
                 </div>
+                <Plx
+                    className={classes.help}
+                    parallaxData={textData}>
+                    <h2>Make elements fly in and stick for some time before they fly out</h2>
+                    <button onClick={ () => this.handleScrollTop() }>Back to top</button>
+                </Plx>
             </div>
         );
     }

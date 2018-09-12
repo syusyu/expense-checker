@@ -5,6 +5,7 @@ import {isEmpty} from "./Util";
 import FileUpload from './FileUpload';
 import animateScroll from 'animated-scroll-to';
 import Typography from '@material-ui/core/Typography';
+import Help from './Help';
 
 
 const styles = theme => ({
@@ -39,10 +40,13 @@ class Cover extends Component {
     render() {
         const {classes, updateFiles} = this.props;
         return (
-            <div className={classes.title}>
-                <Typography variant="display4">Expense data here
-                    <FileUpload isFileSelected={false} updateFiles={updateFiles} />
-                </Typography>
+            <div>
+                <div className={classes.title}>
+                    <Typography variant="display4">Expense data here
+                        <FileUpload isFileSelected={false} updateFiles={updateFiles} />
+                    </Typography>
+                </div>
+                <Help/>
             </div>
         );
     }
