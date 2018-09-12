@@ -9,6 +9,7 @@ const styles = {
     plxTrigger: {
         marginTop: '250vh',
         border: 'solid 1px red',
+        marginBottom: '250vh',
     },
     help: {
         // backgroundColor: '#d3d3d3',
@@ -45,11 +46,11 @@ const textData = [
                 unit: 'vh',
                 property: 'translateY',
             },
-            {
-                startValue: 0,
-                endValue: 1,
-                property: 'opacity',
-            },
+            // {
+            //     startValue: 0,
+            //     endValue: 1,
+            //     property: 'opacity',
+            // },
         ],
     },
     // {
