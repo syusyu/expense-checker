@@ -56,7 +56,7 @@ class App extends Component {
                 for (const key of Object.keys(this.headerTerms)) {
                     content = content.replace(new RegExp(key, "g"), this.headerTerms[key])
                 }
-                const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true, skipEmptyLines: true});
+                const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true, skipEmptyLines: true, trimHeaders: true});
                 if (!isEmpty(parsedData.errors)) {
                     reject(`File '${file.name}' error!!  ${parsedData.errors.map(e => `${e.message} [${e.row}]`)}`);
                 }

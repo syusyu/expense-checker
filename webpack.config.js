@@ -17,6 +17,11 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    resolve: {
+        alias: {
+            Images: path.resolve(__dirname, 'img/'),
+        }
+    },
     devServer: {
         contentBase: './dist',
         port: 3000,
