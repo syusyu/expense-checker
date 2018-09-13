@@ -35,7 +35,7 @@ class Expense extends Component {
     }
 
     render() {
-        const { classes, expense, updateFiles } = this.props;
+        const { classes, expense, updateFiles, fileNames } = this.props;
         const records = expense.records || [];
         const warnings = expense.warnings || [];
         const sum = expense.sum;
@@ -89,7 +89,7 @@ class Expense extends Component {
                     </div>
                 ))}
 
-                <Footer fileNames={this.state.fileNames} updateFiles={updateFiles} />
+                <Footer fileNames={fileNames} updateFiles={updateFiles} />
             </div>
         );
     }
@@ -108,6 +108,7 @@ Expense.propTypes = {
         warnings: PropTypes.array,
         sum: PropTypes.number.isRequired,
     }).isRequired,
+    fileNames: PropTypes.array.isRequired,
     updateFiles: PropTypes.func.isRequired,
 };
 

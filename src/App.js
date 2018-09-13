@@ -135,7 +135,7 @@ class App extends Component {
                 {isEmpty(this.state.expense.records) ?
                     <Cover updateFiles={(e) => this.updateFiles(e)}/>
                     :
-                    <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
+                    <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} fileNames={this.state.fileNames}/>
                 }
                 {showsError ?
                     <Error error={this.state.error} showsError={showsError} closeError={(e, reason) => this.closeError(e, reason)} />
