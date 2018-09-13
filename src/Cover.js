@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {isEmpty} from "./Util";
 import FileUpload from './FileUpload';
 import animateScroll from 'animated-scroll-to';
 import Typography from '@material-ui/core/Typography';
 import Help from './Help';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 
 const styles = theme => ({
@@ -29,7 +30,11 @@ const styles = theme => ({
         fontSize: '4em',
         margin: '0',
     },
-    h2: {}
+    h2: {},
+    questionIcon: {
+        marginLeft: '20px',
+    },
+
 });
 
 class Cover extends Component {
@@ -37,13 +42,21 @@ class Cover extends Component {
         super(props);
     }
 
+    handleScrollTop() {
+        animateScroll(document.querySelector('#help'), { minDuration: 1000 });
+    }
+
     render() {
         const {classes, updateFiles} = this.props;
         return (
             <div>
                 <div className={classes.title}>
-                    <Typography variant="display4">Expense data here
+                    <Typography variant="display4">Put data
                         <FileUpload isFileSelected={false} updateFiles={updateFiles} />
+                        <Button component="span" variant="fab" className={classes.questionIcon} color="primary"
+                                onClick={ () => this.handleScrollTop() }>
+                            <AddIcon/>
+                        </Button>
                     </Typography>
                 </div>
                 <Help/>
