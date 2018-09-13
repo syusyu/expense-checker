@@ -5,25 +5,12 @@ import animateScroll from 'animated-scroll-to';
 import Plx from 'react-plx';
 
 const styles = {
-    help: {
+    helpRoot: {
         width: '100%',
-        marginTop: '150vh',
-        paddingBottom: '250vh',
         backgroundColor: '#F3F3F5',
-    },
-    stickyText: {
-        bottom: 0,
-        left: 0,
-        // maxWidth: '54rem',
-        opacity: '0',
-        // padding: '0 2rem',
-        position: 'fixed',
-        width: '100%',
-    },
-    plxTrigger: {
-        position: 'relative',
-        top: '50vh',
-        // border: 'solid 1px black',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 };
 
@@ -59,14 +46,9 @@ class Help extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div id="help" style={styles.help}>
-                <Plx
-                    className={classes.stickyText}
-                    parallaxData={textData}>
-                    <h2>Make elements fly in and stick for some time before they fly out</h2>
-                    <button onClick={ () => this.handleScrollTop() }>Back to top</button>
-                </Plx>
-                <div id="plx-trigger" style={styles.plxTrigger}></div>
+            <div id="help-root" style={styles.helpRoot}>
+                <h2>Make elements fly in and stick for some time before they fly out</h2>
+                <button onClick={ () => this.handleScrollTop() }>Back to top</button>
             </div>
         );
     }

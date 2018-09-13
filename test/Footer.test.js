@@ -8,8 +8,8 @@ configure({ adapter: new Adapter() });
 const dummyClasses = {};
 const dummyUpdateFilesFunc = () => {};
 
-describe('<Cover />', () => {
-    it('Cover is shown', () => {
+describe('<Landing />', () => {
+    it('Landing is shown', () => {
         const fileNames = ['foo.csv', 'bar.csv'];
         const wrapper = mount(<Footer classes={dummyClasses} fileNames={fileNames} updateFiles={dummyUpdateFilesFunc} />);
         expect(wrapper.find('FileUpload').length).toEqual(1);

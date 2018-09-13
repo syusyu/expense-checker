@@ -7,7 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const styles = theme => ({
     input: {
-        display: 'none',
+        display: 'none!important;',
     },
     titleIcon: {
         marginLeft: '20px',

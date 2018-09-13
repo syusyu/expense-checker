@@ -5,7 +5,7 @@ import Papa from 'papaparse';
 import {inverseObject, isEmpty} from './Util';
 import Moment from 'moment';
 import Error from './Error';
-import Cover from './Cover';
+import Landing from './Landing';
 
 class App extends Component {
     constructor(props) {
@@ -133,7 +133,7 @@ class App extends Component {
         return (
             <div>
                 {isEmpty(this.state.expense.records) ?
-                    <Cover updateFiles={(e) => this.updateFiles(e)}/>
+                    <Landing updateFiles={(e) => this.updateFiles(e)}/>
                     :
                     <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} fileNames={this.state.fileNames}/>
                 }

@@ -20,6 +20,9 @@ const styles = theme => ({
     cardTotal: {
         border: "solid 3px #78909C",
     },
+    expenseRoot: {
+        height: 'unset',
+    }
 });
 
 const currencyFormat = new Intl.NumberFormat('ja-JP', {
@@ -41,7 +44,7 @@ class Expense extends Component {
         const sum = expense.sum;
 
         return (
-            <div>
+            <div className={classes.expenseRoot}>
                 <Grid container spacing={40} alignItems="flex-end">
                     {records.map(record => (
                         <Grid item key={record.date} xs={12} sm={6} md={4}>
