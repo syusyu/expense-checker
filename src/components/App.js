@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Footer from './Footer';
-import Expense from './Expense';
+import Expense from 'Components/Expense';
 import Papa from 'papaparse';
-import {inverseObject, isEmpty} from './Util';
+import {inverseObject, isEmpty} from '../Util';
 import Moment from 'moment';
-import Error from './Error';
-import Landing from './Landing';
+import Error from 'Components/Error';
+import Landing from 'Components/Landing';
 
 class App extends Component {
     constructor(props) {

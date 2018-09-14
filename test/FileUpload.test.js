@@ -1,7 +1,7 @@
 import React from 'react';
 import  { configure, mount, shallow  } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import FileUpload from '../src/FileUpload';
+import FileUpload from '../src/components/FileUpload';
 
 configure({ adapter: new Adapter() });
 

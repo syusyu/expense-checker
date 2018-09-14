@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import FileUpload from './FileUpload';
+import FileUpload from 'Components/FileUpload';
 import animateScroll from 'animated-scroll-to';
 import Typography from '@material-ui/core/Typography';
-import Help from './Help';
+import Help from 'Components/Help';
 import IconButton  from '@material-ui/core/IconButton';
 import ArrowForward from '@material-ui/icons/ArrowForwardIos';
 import HelpIcon from '@material-ui/icons/Help';

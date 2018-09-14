@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {isEmpty} from "./Util";
-import FileUpload from './FileUpload';
+import FileUpload from 'Components/FileUpload';
 
 const styles = theme => ({
     footer: {

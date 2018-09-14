@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import  { configure, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
-import Expense from '../src/Expense';
+import Expense from '../src/components/Expense';
 
 configure({ adapter: new Adapter() });
 

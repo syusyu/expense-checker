@@ -6,9 +6,9 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import {isEmpty} from "./Util";
+import {isEmpty} from "../Util";
 import Moment from 'moment';
-import Footer from './Footer';
+import Footer from 'Components/Footer';
 
 const styles = theme => ({
     cardExpenditure: {

@@ -20,6 +20,7 @@ module.exports = {
     resolve: {
         alias: {
             Images: path.resolve(__dirname, 'img/'),
+            Components: path.resolve(__dirname, 'src/components/'),
         }
     },
     devServer: {
@@ -39,11 +40,7 @@ module.exports = {
             },
             {
                 test: /.*\.(gif|png|jpe?g)$/i,
-                use: [
-                    {
-                        loader: 'file-loader'
-                    }
-                ]
+                loader: 'file-loader'
             }
         ]
     },
