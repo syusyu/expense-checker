@@ -27,16 +27,8 @@ const styles = (theme) => ({
         marginRight: theme.spacing.unit,
     },
     actionsContainer: {
-        marginBottom: theme.spacing.unit * 2,
+        // marginBottom: theme.spacing.unit * 2,
     },
-    resetContainer: {
-        padding: theme.spacing.unit * 3,
-    },
-    gitHublink: {
-        // fontSize: '2rem',
-        // margin: '.5rem',
-        // padding: '0.4rem 0',
-    }
 });
 
 const steps = ['Prepare the expenditure data', 'Put the data and know your monthly expenditure', 'For more information'];
@@ -49,8 +41,7 @@ const stepContent = (step, classes) => {
         case 1:
             return <img src={ImgHelp} width="50%"/>;
         case 2:
-            return <div className={classes.gitHublink}>
-                See the documentation of <a href='https://github.com/syusyu/expense-checker'>GitHub</a></div>;
+            return <div>See the documentation of <a href='https://github.com/syusyu/expense-checker' target="_blank">GitHub</a></div>;
         default:
             return '';
     }
@@ -107,23 +98,14 @@ class Help extends Component {
                                         <div className={classes.actionsContainer}>
                                             <div>
                                                 {activeStep > 0 && (
-                                                    <Button
-                                                        disabled={activeStep === 0}
-                                                        onClick={this.handleBack}
-                                                        className={classes.button}
-                                                        color='primary'
-                                                    >
+                                                    <Button onClick={this.handleBack} className={classes.button}
+                                                            color='primary' >
                                                         Back
                                                     </Button>
                                                 )}
                                                 {activeStep < steps.length -1 && (
-                                                    <Button
-                                                        variant="contained"
-                                                        color="primary"
-                                                        onClick={this.handleNext}
-                                                        className={classes.button}
-                                                        color='primary'
-                                                    >
+                                                    <Button onClick={this.handleNext} className={classes.button}
+                                                            color='primary'>
                                                         Next
                                                     </Button>
                                                 )}
@@ -134,14 +116,6 @@ class Help extends Component {
                             );
                         })}
                     </Stepper>
-                    {activeStep === steps.length && (
-                        <Paper square elevation={0} className={classes.resetContainer}>
-                            <Typography>All steps completed - you&quot;re finished</Typography>
-                            <Button onClick={this.handleReset} className={classes.button}>
-                                Reset
-                            </Button>
-                        </Paper>
-                    )}
                 </div>
                 <button onClick={() => this.handleScrollTop()}>Back to top</button>
             </div>
