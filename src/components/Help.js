@@ -9,8 +9,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ImgHelp01 from 'Images/help01.png'
-import ImgHelp02 from 'Images/help02.png'
+import ImgHelp from 'Images/help.png'
 
 const styles = (theme) => ({
     helpRoot: {
@@ -33,33 +32,27 @@ const styles = (theme) => ({
     resetContainer: {
         padding: theme.spacing.unit * 3,
     },
+    gitHublink: {
+        // fontSize: '2rem',
+        // margin: '.5rem',
+        // padding: '0.4rem 0',
+    }
 });
 
-const steps = ['Prepare the expense files', 'Put them', 'Show the result', 'For more information'];
+const steps = ['Prepare the expenditure data', 'Put the data and know your monthly expenditure', 'For more information'];
 
-const stepContent = (step) => {
+const stepContent = (step, classes) => {
     switch (step) {
         case 0:
-            return `The files are required to have the headers; 'date' and 'expenditure.`;
+            return (<p>The format of the data is CSV and that contains headers; 'date' and 'expenditure' at least.<br />
+                <a href="#">Download CSV template</a></p>);
         case 1:
-            return '';
+            return <img src={ImgHelp} width="50%"/>;
         case 2:
-            return ``;
+            return <div className={classes.gitHublink}>
+                See the documentation of <a href='https://github.com/syusyu/expense-checker'>GitHub</a></div>;
         default:
             return '';
-    }
-};
-
-const stepImage = (step) => {
-    switch (step) {
-        case 0:
-            return null;
-        case 1:
-            return ImgHelp01;
-        case 2:
-            return ImgHelp02;
-        default:
-            return null;
     }
 };
 
@@ -77,6 +70,7 @@ class Help extends Component {
 
     handleScrollTop() {
         animateScroll(0, {minDuration: 1000});
+        this.handleReset();
     }
 
     handleNext() {
@@ -97,15 +91,9 @@ class Help extends Component {
         });
     };
 
-    image(step) {
-        const src = stepImage(step);
-        return (src ? <img src={src}/> : null);
-    }
-
     render() {
         const {classes} = this.props;
-        const { activeStep } = this.state;
-        const templateDownload = activeStep == 0 ? <a href="#">Download CSV template</a> : null;
+        const {activeStep} = this.state;
         return (
             <div id="help-root" className={classes.helpRoot}>
                 <div className={classes.stepperRoot}>
@@ -115,28 +103,30 @@ class Help extends Component {
                                 <Step key={label}>
                                     <StepLabel>{label}</StepLabel>
                                     <StepContent>
-                                        <Typography>{stepContent(index)}</Typography>
-                                        {templateDownload}
-                                        {this.image(index)}
+                                        <Typography>{stepContent(index, classes)}</Typography>
                                         <div className={classes.actionsContainer}>
                                             <div>
-                                                <Button
-                                                    disabled={activeStep === 0}
-                                                    onClick={this.handleBack}
-                                                    className={classes.button}
-                                                    color='primary'
-                                                >
-                                                    Back
-                                                </Button>
-                                                <Button
-                                                    variant="contained"
-                                                    color="primary"
-                                                    onClick={this.handleNext}
-                                                    className={classes.button}
-                                                    color='primary'
-                                                >
-                                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                                </Button>
+                                                {activeStep > 0 && (
+                                                    <Button
+                                                        disabled={activeStep === 0}
+                                                        onClick={this.handleBack}
+                                                        className={classes.button}
+                                                        color='primary'
+                                                    >
+                                                        Back
+                                                    </Button>
+                                                )}
+                                                {activeStep < steps.length -1 && (
+                                                    <Button
+                                                        variant="contained"
+                                                        color="primary"
+                                                        onClick={this.handleNext}
+                                                        className={classes.button}
+                                                        color='primary'
+                                                    >
+                                                        Next
+                                                    </Button>
+                                                )}
                                             </div>
                                         </div>
                                     </StepContent>
