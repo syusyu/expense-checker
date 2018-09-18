@@ -11,7 +11,9 @@ describe('[UI] <App />', () => {
 
     it('Initial state', () => {
         const wrapper = mount(<App />);
-        expect(wrapper.find('h1').text()).toEqual('Put data');
+        const titles = wrapper.find('h1').map((title) => title.text());
+        // console.log(`#### h1 titles=${titles}`);
+        expect(titles).toEqual(['Put data', 'How to use?']);
     });
 
     it('Set state', () => {
