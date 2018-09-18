@@ -10,7 +10,7 @@ const styles = theme => ({
         display: 'none!important;',
     },
     titleIcon: {
-        marginLeft: '20px',
+        marginLeft: '40px',
     },
     footerIcon: {
         position: 'fixed',

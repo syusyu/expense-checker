@@ -42,6 +42,11 @@
   "jest": {
     "setupTestFrameworkScriptFile": "./testSetup.js",
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "moduleNameMapper": {
+      "^Components/(.+)": "<rootDir>/src/components/$1",
+      "^Images/(.+)": "<rootDir>/emptyModule.js",
+      "^Data/(.+)": "<rootDir>/emptyModule.js"
+    }
   }
 }

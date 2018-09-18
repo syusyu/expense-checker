@@ -1,7 +1,7 @@
 import React from 'react';
 import  { configure, mount  } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Footer from '../src/components/Footer';
+import Footer from 'Components/Footer';
 
 configure({ adapter: new Adapter() });
 

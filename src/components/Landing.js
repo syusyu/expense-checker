@@ -5,8 +5,7 @@ import FileUpload from 'Components/FileUpload';
 import animateScroll from 'animated-scroll-to';
 import Typography from '@material-ui/core/Typography';
 import Help from 'Components/Help';
-import IconButton  from '@material-ui/core/IconButton';
-import ArrowForward from '@material-ui/icons/ArrowForwardIos';
+import IconButton from '@material-ui/core/IconButton';
 import HelpIcon from '@material-ui/icons/Help';
 
 
@@ -16,17 +15,20 @@ const styles = theme => ({
         marginLeft: '10px',
     },
     titleRoot: {
+        position: 'relative',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    helpButton: {
-        marginLeft: '80px',
+    landingFooter: {
+        height: 'unset',
+        position: 'absolute',
+        bottom: theme.spacing.unit * 2,
+        right: theme.spacing.unit * 2,
     },
     helpIcon: {
         fontSize: 40,
     },
-
 });
 
 class Landing extends Component {
@@ -34,8 +36,8 @@ class Landing extends Component {
         super(props);
     }
 
-    handleScrollTop() {
-        animateScroll(document.querySelector('#help-root'), { minDuration: 1000 });
+    handleScrollHelp() {
+        animateScroll(document.querySelector('#help-root'), {minDuration: 1000});
     }
 
     render() {
@@ -44,15 +46,17 @@ class Landing extends Component {
             <div>
                 <div id="title-root" className={classes.titleRoot}>
                     <Typography variant="display4">
-                        Put data <ArrowForward className={classes.arrowForward} />
+                        Put data
 
-                        <FileUpload isFileSelected={false} updateFiles={updateFiles} />
+                        <FileUpload isFileSelected={false} updateFiles={updateFiles}/>
 
-                        <IconButton className={classes.helpButton} color="primary"
-                                onClick={ () => this.handleScrollTop() }>
-                            <HelpIcon className={classes.helpIcon}/>
-                        </IconButton >
                     </Typography>
+
+                    <div className={classes.landingFooter}>
+                        <IconButton onClick={() => this.handleScrollHelp()}>
+                            <HelpIcon className={classes.helpIcon}/>
+                        </IconButton>
+                    </div>
                 </div>
 
                 <Help/>

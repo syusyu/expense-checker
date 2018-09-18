@@ -1,15 +1,17 @@
 import React from 'react';
-import App from '../src/components/App';
+import App from 'Components/App';
 import  { configure, mount, shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
 describe('[UI] <App />', () => {
+    const dummyClasses = {};
+    const dummyUpdateFilesFunc = () => {};
+
     it('Initial state', () => {
         const wrapper = mount(<App />);
-        expect(wrapper.find('h1').text()).toEqual('Put your expenditure files');
+        expect(wrapper.find('h1').text()).toEqual('Put data');
     });
 
     it('Set state', () => {

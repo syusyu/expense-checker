@@ -21,6 +21,7 @@ module.exports = {
         alias: {
             Images: path.resolve(__dirname, 'img/'),
             Components: path.resolve(__dirname, 'src/components/'),
+            Data: path.resolve(__dirname, 'data/'),
         }
     },
     devServer: {
@@ -39,7 +40,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /.*\.(gif|png|jpe?g)$/i,
+                test: /.*\.(zip|gif|png|jpe?g)$/i,
                 use: [
                     {loader: 'file-loader'}
                 ]
