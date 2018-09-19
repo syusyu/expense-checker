@@ -128,7 +128,6 @@ class App extends Component {
     }
 
     render() {
-        const showsError = !isEmpty(this.state.error);
         return (
             <div>
                 {isEmpty(this.state.expense.records) ?
@@ -136,8 +135,8 @@ class App extends Component {
                     :
                     <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} fileNames={this.state.fileNames}/>
                 }
-                {showsError ?
-                    <Error error={this.state.error} showsError={showsError} closeError={(e, reason) => this.closeError(e, reason)} />
+                {!isEmpty(this.state.error) ?
+                    <Error error={this.state.error} closeError={(e, reason) => this.closeError(e, reason)} />
                     :
                     null
                 }

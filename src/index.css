@@ -8,3 +8,7 @@ div {
     height: 100%;
 }
 
+#error * {
+    height: unset;
+
+}
