@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require("webpack")
+const webpack = require("webpack");
 
 let conf = {};
 try {
@@ -50,4 +50,4 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({CONFIG: conf})
     ]
-}
+};

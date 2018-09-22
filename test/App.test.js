@@ -25,7 +25,7 @@ describe('[UI] <App />', () => {
             sum: 3000,
         };
         const wrapper = mount(<App />);
-        wrapper.setState({expense: expense, fileNames: ['foo']});
+        wrapper.setState({expense, fileNames: ['foo']});
         const months = wrapper.find('CardHeader span').map(node => node.text());
         const expenditures = wrapper.find('CardContent h1').map(node => node.text());
         expect(months).toEqual(['2018/08', '2018/07', 'Total']);

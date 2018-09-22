@@ -34,7 +34,7 @@ class App extends Component {
         const fileNames = Array.from(e.target.files).map(file => file.name);
         Promise.all(Array.from(e.target.files).map(file => this.parseCsv(file))).then(result => {
             this.setState({
-                fileNames: fileNames,
+                fileNames,
                 expense: this.calcExpense(result),
             });
         }, error => {
@@ -53,7 +53,7 @@ class App extends Component {
             reader.onload = (e) => {
                 let content = e.target.result;
                 for (const key of Object.keys(this.headerTerms)) {
-                    content = content.replace(new RegExp(key, "g"), this.headerTerms[key])
+                    content = content.replace(new RegExp(key, "g"), this.headerTerms[key]);
                 }
                 const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true, skipEmptyLines: true, trimHeaders: true});
                 if (!isEmpty(parsedData.errors)) {
@@ -100,12 +100,14 @@ class App extends Component {
             sum += expenditure;
             return prev;
         }, []);
-        return {records: this.sort(records), warnings: warnings, sum: sum};
+        return {records: this.sort(records), warnings, sum};
     }
 
     color (val) {
         const result = '#EEEEEE';
-        if (!this.colors) return result;
+        if (!this.colors) {
+            return result;
+        }
         for (const e of this.colors) {
             if (!e.max && e.min <= val) {
                 return e.color;
