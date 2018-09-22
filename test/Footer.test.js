@@ -1,15 +1,15 @@
 import React from 'react';
 import  { configure, mount  } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Footer from '../src/Footer';
+import Footer from 'Components/Footer';
 
 configure({ adapter: new Adapter() });
 
 const dummyClasses = {};
 const dummyUpdateFilesFunc = () => {};
 
-describe('<Footer />', () => {
-    it('Footer is shown', () => {
+describe('<Landing />', () => {
+    it('Landing is shown', () => {
         const fileNames = ['foo.csv', 'bar.csv'];
         const wrapper = mount(<Footer classes={dummyClasses} fileNames={fileNames} updateFiles={dummyUpdateFilesFunc} />);
         expect(wrapper.find('FileUpload').length).toEqual(1);

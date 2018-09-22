@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
-import {isEmpty} from "./Util";
 
 const styles = theme => ({
     input: {
-        display: 'none',
+        display: 'none!important;',
     },
     titleIcon: {
-        marginLeft: '20px',
+        marginLeft: '40px',
     },
     footerIcon: {
         position: 'fixed',

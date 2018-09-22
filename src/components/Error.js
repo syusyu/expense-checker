@@ -4,9 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import {isEmpty} from "../Util";
 
 const styles = theme => ({
-    root: {
+    message: {
         color: '#F8BBD0',
     },
     close: {
@@ -21,15 +22,15 @@ class Error extends React.Component {
     }
 
     render() {
-        const { classes, error, showsError, closeError } = this.props;
+        const { classes, error, closeError } = this.props;
         return (
-            <div>
+            <div id="error" className={classes.root}>
                 <Snackbar
                     anchorOrigin={{vertical: 'bottom', horizontal: 'right',}}
-                    open={showsError}
+                    open={!isEmpty(error)}
                     onClose={closeError}
                     ContentProps={{'aria-describedby': 'message-id',}}
-                    message={<span className={classes.root} id="message-id">{error.message}</span>}
+                    message={<span className={classes.message} id="message-id">{error.message}</span>}
                     action={[
                         <IconButton key="close" aria-label="Close" color="inherit" className={classes.close} onClick={closeError}>
                             <CloseIcon />
@@ -46,7 +47,6 @@ Error.propTypes = {
     error: PropTypes.shape({
         message: PropTypes.string,
     }).isRequired,
-    showsError: PropTypes.bool,
     closeError: PropTypes.func.isRequired,
 };
 

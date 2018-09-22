@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-import Footer from './Footer';
-import Expense from './Expense';
+import Expense from 'Components/Expense';
 import Papa from 'papaparse';
-import {inverseObject, isEmpty} from './Util';
+import {inverseObject, isEmpty} from '../Util';
 import Moment from 'moment';
-import Typography from '@material-ui/core/Typography';
-import FileUpload from './FileUpload';
-import Error from './Error';
-
-const styles = theme => ({
-    close: {
-        width: theme.spacing.unit * 4,
-        height: theme.spacing.unit * 4,
-    },
-});
+import Error from 'Components/Error';
+import Landing from 'Components/Landing';
 
 class App extends Component {
     constructor(props) {
@@ -43,11 +34,9 @@ class App extends Component {
         const fileNames = Array.from(e.target.files).map(file => file.name);
         Promise.all(Array.from(e.target.files).map(file => this.parseCsv(file))).then(result => {
             this.setState({
-                fileNames: fileNames,
+                fileNames,
                 expense: this.calcExpense(result),
             });
-            const root = document.getElementById('root');
-            root.classList.remove('root');
         }, error => {
             this.setState({
                 error: {
@@ -64,9 +53,9 @@ class App extends Component {
             reader.onload = (e) => {
                 let content = e.target.result;
                 for (const key of Object.keys(this.headerTerms)) {
-                    content = content.replace(new RegExp(key, "g"), this.headerTerms[key])
+                    content = content.replace(new RegExp(key, "g"), this.headerTerms[key]);
                 }
-                const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true, skipEmptyLines: true});
+                const parsedData = Papa.parse(content, {encoding: 'shift-jis', header: true, skipEmptyLines: true, trimHeaders: true});
                 if (!isEmpty(parsedData.errors)) {
                     reject(`File '${file.name}' error!!  ${parsedData.errors.map(e => `${e.message} [${e.row}]`)}`);
                 }
@@ -111,12 +100,14 @@ class App extends Component {
             sum += expenditure;
             return prev;
         }, []);
-        return {records: this.sort(records), warnings: warnings, sum: sum};
+        return {records: this.sort(records), warnings, sum};
     }
 
     color (val) {
         const result = '#EEEEEE';
-        if (!this.colors) return result;
+        if (!this.colors) {
+            return result;
+        }
         for (const e of this.colors) {
             if (!e.max && e.min <= val) {
                 return e.color;
@@ -139,23 +130,15 @@ class App extends Component {
     }
 
     render() {
-        const showsError = !isEmpty(this.state.error);
         return (
             <div>
                 {isEmpty(this.state.expense.records) ?
-                    <div>
-                        <Typography variant="display4">Put your expenditure files
-                            <FileUpload isFileSelected={false} updateFiles={(e) => this.updateFiles(e)} />
-                        </Typography>
-                    </div>
+                    <Landing updateFiles={(e) => this.updateFiles(e)}/>
                     :
-                    <div>
-                        <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} />
-                        <Footer fileNames={this.state.fileNames} updateFiles={(e) => this.updateFiles(e)} />
-                    </div>
+                    <Expense expense={this.state.expense} updateFiles={(e) => this.updateFiles(e)} fileNames={this.state.fileNames}/>
                 }
-                {showsError ?
-                    <Error error={this.state.error} showsError={showsError} closeError={(e, reason) => this.closeError(e, reason)} />
+                {!isEmpty(this.state.error) ?
+                    <Error error={this.state.error} closeError={(e, reason) => this.closeError(e, reason)} />
                     :
                     null
                 }

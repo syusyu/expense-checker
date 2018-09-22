@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 import  { configure, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
-import Expense from '../src/Expense';
+import Expense from 'Components/Expense';
 
 configure({ adapter: new Adapter() });
-
-const dummyClasses = {};
 
 describe('<Expense />', () => {
     it('Show expenditure', () => {
@@ -19,7 +17,7 @@ describe('<Expense />', () => {
             sum: 3000,
         };
 
-        const wrapper = mount(<Expense expense={expense} classes={dummyClasses} />);
+        const wrapper = mount(<Expense expense={expense} classes={{}} updateFiles={() => ''} fileNames={[]} />);
         const months = wrapper.find('CardHeader span').map(node => node.text());
         const expenditures = wrapper.find('CardContent h1').map(node => node.text());
         expect(months).toEqual(['2018/08', '2018/07', 'Total']);

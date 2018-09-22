@@ -1,15 +1,19 @@
 import React from 'react';
-import App from '../src/App';
+import App from 'Components/App';
 import  { configure, mount, shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
 describe('[UI] <App />', () => {
+    const dummyClasses = {};
+    const dummyUpdateFilesFunc = () => {};
+
     it('Initial state', () => {
         const wrapper = mount(<App />);
-        expect(wrapper.find('h1').text()).toEqual('Put your expenditure files');
+        const titles = wrapper.find('h1').map((title) => title.text());
+        // console.log(`#### h1 titles=${titles}`);
+        expect(titles).toEqual(['Put data', 'How to use?']);
     });
 
     it('Set state', () => {
@@ -21,7 +25,7 @@ describe('[UI] <App />', () => {
             sum: 3000,
         };
         const wrapper = mount(<App />);
-        wrapper.setState({expense: expense, fileNames: ['foo']});
+        wrapper.setState({expense, fileNames: ['foo']});
         const months = wrapper.find('CardHeader span').map(node => node.text());
         const expenditures = wrapper.find('CardContent h1').map(node => node.text());
         expect(months).toEqual(['2018/08', '2018/07', 'Total']);

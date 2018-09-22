@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require("webpack")
+const webpack = require("webpack");
 
 let conf = {};
 try {
@@ -17,6 +17,13 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    resolve: {
+        alias: {
+            Images: path.resolve(__dirname, 'img/'),
+            Components: path.resolve(__dirname, 'src/components/'),
+            Data: path.resolve(__dirname, 'data/'),
+        }
+    },
     devServer: {
         contentBase: './dist',
         port: 3000,
@@ -31,10 +38,16 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /.*\.(zip|gif|png|jpe?g)$/i,
+                use: [
+                    {loader: 'file-loader'}
+                ]
             }
         ]
     },
     plugins: [
         new webpack.DefinePlugin({CONFIG: conf})
     ]
-}
+};
