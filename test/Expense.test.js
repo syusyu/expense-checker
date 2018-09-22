@@ -7,7 +7,7 @@ import Expense from 'Components/Expense';
 
 configure({ adapter: new Adapter() });
 
-describe('<Expense />', () => {
+describe('[UI] <Expense />', () => {
     it('Show expenditure', () => {
         const expense = {
             records: [
